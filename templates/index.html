@@ -32,32 +32,32 @@
           <div id="selectMainAtt" style="margin-top: 3px; margin-bottom: 3px; ">
             <div class="btn-group" data-toggle="buttons" role="group">
 
-              <button type="button" class="btn radiobtn btn-default active">
+              <button type="button" class="btn radiobtn btn-default active btn-sm" style="font-size: 13px">
                 <input type="radio" name="selectMainAtt" value="Any" checked="checked">
                 Any
               </button>
               
-              <button type="button" class="btn radiobtn btn-default">
+              <button type="button" class="btn radiobtn btn-default btn-sm">
                 <input type="radio" name="selectMainAtt" value="火">
                 <img src="https://raw.githubusercontent.com/jutongpan/paddata/master/img/Attribute/1.png" height="18" width="18">
               </button>
             
-              <button type="button" class="btn radiobtn btn-default">
+              <button type="button" class="btn radiobtn btn-default btn-sm">
                 <input type="radio" name="selectMainAtt" value="水">
                 <img src="https://raw.githubusercontent.com/jutongpan/paddata/master/img/Attribute/2.png" height="18" width="18">
               </button>
             
-              <button type="button" class="btn radiobtn btn-default">
+              <button type="button" class="btn radiobtn btn-default btn-sm">
                 <input type="radio" name="selectMainAtt" value="木">
                 <img src="https://raw.githubusercontent.com/jutongpan/paddata/master/img/Attribute/3.png" height="18" width="18">
               </button>
             
-              <button type="button" class="btn radiobtn btn-default">
+              <button type="button" class="btn radiobtn btn-default btn-sm">
                 <input type="radio" name="selectMainAtt" value="光">
                 <img src="https://raw.githubusercontent.com/jutongpan/paddata/master/img/Attribute/4.png" height="18" width="18">
               </button>
             
-              <button type="button" class="btn radiobtn btn-default">
+              <button type="button" class="btn radiobtn btn-default btn-sm">
                 <input type="radio" name="selectMainAtt" value="暗">
                 <img src="https://raw.githubusercontent.com/jutongpan/paddata/master/img/Attribute/5.png" height="18" width="18">
               </button>
@@ -72,37 +72,37 @@
           <div id="selectSubAtt" class="radioGroupButtons" style="margin-top: 3px; margin-bottom: 3px; ">
             <div class="btn-group" data-toggle="buttons" role="group">
 
-              <button type="button" class="btn radiobtn btn-default active">
+              <button type="button" class="btn radiobtn btn-default active btn-sm" style="font-size: 13px">
                 <input type="radio" name="selectSubAtt" value="Any" checked="checked">
                 Any
               </button>
               
-              <button type="button" class="btn radiobtn btn-default">
+              <button type="button" class="btn radiobtn btn-default btn-sm">
                 <input type="radio" name="selectSubAtt" value="火">
                 <img src="https://raw.githubusercontent.com/jutongpan/paddata/master/img/Attribute/1.png" height="18" width="18">
               </button>
             
-              <button type="button" class="btn radiobtn btn-default">
+              <button type="button" class="btn radiobtn btn-default btn-sm">
                 <input type="radio" name="selectSubAtt" value="水">
                 <img src="https://raw.githubusercontent.com/jutongpan/paddata/master/img/Attribute/2.png" height="18" width="18">
               </button>
             
-              <button type="button" class="btn radiobtn btn-default">
+              <button type="button" class="btn radiobtn btn-default btn-sm">
                 <input type="radio" name="selectSubAtt" value="木">
                 <img src="https://raw.githubusercontent.com/jutongpan/paddata/master/img/Attribute/3.png" height="18" width="18">
               </button>
             
-              <button type="button" class="btn radiobtn btn-default">
+              <button type="button" class="btn radiobtn btn-default btn-sm">
                 <input type="radio" name="selectSubAtt" value="光">
                 <img src="https://raw.githubusercontent.com/jutongpan/paddata/master/img/Attribute/4.png" height="18" width="18">
               </button>
             
-              <button type="button" class="btn radiobtn btn-default">
+              <button type="button" class="btn radiobtn btn-default btn-sm">
                 <input type="radio" name="selectSubAtt" value="暗">
                 <img src="https://raw.githubusercontent.com/jutongpan/paddata/master/img/Attribute/5.png" height="18" width="18">
               </button>
 
-              <button type="button" class="btn radiobtn btn-default">
+              <button type="button" class="btn radiobtn btn-default btn-sm" style="font-size: 13px">
                 <input type="radio" name="selectSubAtt" value="None">
                 None
               </button>
@@ -111,6 +111,7 @@
           </div>
         </div>
 
+        <label>Awoken Skills</label>
         <div style="display:flex; flex-wrap:wrap;">
           <div id="selected_awokenskills" style="align-self:center;">
 
@@ -130,16 +131,13 @@
           </div>
         </div>
 
-        <div>
-          <label for="TopN">Show Results</label>
-          <div>
-            <select id="TopN" class="selectpicker" data-width="auto">
-              <option>Top 10</option>
-              <option selected = "selected">Top 50</option>
-              <option>Top 100</option>
-              <option>All</option>
-            </select>
-          </div>
+        <div style="padding-top: 10px;">
+          <select id="TopN" class="selectpicker" data-width="auto">
+            <option>Top 10</option>
+            <option selected = "selected">Top 50</option>
+            <option>Top 100</option>
+            <option>All</option>
+          </select>
         </div>
 
         <br>
@@ -165,6 +163,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/bootstrap-select.min.js"></script>
   <script src="{{ url_for('static', filename='js/form.js') }}"></script>
   <script type="text/javascript">
+    // $('.selectpicker').selectpicker('setStyle', 'btn-default btn-sm');
+
     $('button[name=AwokenSkillSelector]').click(function() {
       var ASID = $(this).val();
       $('div#selected_awokenskills').append(

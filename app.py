@@ -16,6 +16,8 @@ df_monster['Weighted'] = df_monster['Hp']/10 + df_monster['Atk']/5 + df_monster[
 df_monster['Weighted110'] = df_monster['Hp110']/10 + df_monster['Atk110']/5 + df_monster['Rcv110']/3
 
 df_awoken = pd.read_sql_query("select * from AwokenSkillRelation;", conn)
+df_countAS_byMonAS = df_awoken.groupby(['MonsterId','AwokenSkillId']).size().reset_index(name='counts')
+df_countAS_byMonASSuper = df_awoken.groupby(['MonsterId','AwokenSkillId', 'SuperAwoken']).size().reset_index(name='counts')
 
 df_type = pd.read_sql_query("select * from TypeRelation;", conn)
 
@@ -60,9 +62,13 @@ def monSearch1():
 
     if Awoken:
         Awoken = [int(i) for i in Awoken]
-        MonsterIdByAwoken = df_awoken[df_awoken.AwokenSkillId.isin(Awoken)].MonsterId.tolist()
-        if MonsterIdByAwoken:
-            dff = dff[dff.MonsterId.isin(MonsterIdByAwoken)]
+        MonsterIdByAllAwoken_listoflists = [df_countAS_byMonAS[(df_countAS_byMonAS.AwokenSkillId==i) & (df_countAS_byMonAS.counts>=Awoken.count(i))].MonsterId.tolist() for i in list(set(Awoken))]
+        MonsterIdByNonSuperAwoken_listoflists = [df_countAS_byMonASSuper[(df_countAS_byMonASSuper.SuperAwoken==0) & (df_countAS_byMonASSuper.AwokenSkillId==i) & (df_countAS_byMonASSuper.counts>=Awoken.count(i))].MonsterId.tolist() for i in list(set(Awoken))]
+        MonsterIdDiff_listofsets = [set.difference(set(MonsterIdByAllAwoken_listoflists[i]), set(MonsterIdByNonSuperAwoken_listoflists[i])) for i in range(len(set(Awoken)))]
+        MonsterIdDiffIntersec = set.intersection(*MonsterIdDiff_listofsets)
+        MonsterIdByAllAwoken = set.intersection(*map(set, MonsterIdByAllAwoken_listoflists))
+        MonsterIdByAwokenIncOneSup = list(set.difference(MonsterIdByAllAwoken, MonsterIdDiffIntersec))
+        dff = dff[dff.MonsterId.isin(MonsterIdByAwokenIncOneSup)]
 
     if TopN!="All":
         dff = dff.nlargest(n = int(re.search('[0-9]+', TopN)[0]), columns = 'MonsterId')
