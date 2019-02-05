@@ -9,19 +9,12 @@
   <title>PAD Monsters</title>
 
   <link rel="stylesheet" href="https://bootswatch.com/3/slate/bootstrap.min.css">
-  <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/slate.min.css') }}"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/css/bootstrap-select.min.css">
   <style type="text/css">
     .btn-monster.btn {
       padding: 0px;
     }
-    .form-control {
-      width: auto;
-    }
   </style>
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-  <script src="{{ url_for('static', filename='js/form.js') }}"></script>
 
 </head>
 
@@ -118,9 +111,9 @@
           </div>
         </div>
 
-        <label for = "TopN">Show Results</label>
+        <label for="TopN">Show Results</label>
         <div>
-          <select id = "TopN" class='form-control'>
+          <select id="TopN" class="selectpicker" data-width="auto">
             <option>Top 10</option>
             <option selected = "selected">Top 50</option>
             <option>Top 100</option>
@@ -145,5 +138,11 @@
     <div id="monDataViewer"></div>
 
   </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/bootstrap-select.min.js"></script>
+  <script src="{{ url_for('static', filename='js/form.js') }}"></script>
+
 </body>
 </html>
