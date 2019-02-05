@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>PAD Monsters</title>
+
+  <link rel="stylesheet" href="https://bootswatch.com/3/slate/bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/slate.min.css') }}"> -->
+  <style type="text/css">
+    .btn-monster.btn {
+      padding: 0px;
+    }
+    .form-control {
+      width: auto;
+    }
+  </style>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+  <script src="{{ url_for('static', filename='js/form.js') }}"></script>
+
+</head>
+
+<body>
+  <div class="container-fluid">
+
+    <h2>PAD Monsters</h2>
+
+    <div class="well">
+
+      <form id="filter">
+        <div class="form-group">
+          <label for="selectMainAtt">Main Attribute</label>
+          <br>
+          <div id="selectMainAtt" style="margin-top: 3px; margin-bottom: 3px; ">
+            <div class="btn-group" data-toggle="buttons" role="group">
+
+              <button type="button" class="btn radiobtn btn-default active">
+                <input type="radio" name="selectMainAtt" value="Any" checked="checked">
+                Any
+              </button>
+              
+              <button type="button" class="btn radiobtn btn-default">
+                <input type="radio" name="selectMainAtt" value="火">
+                <img src="https://raw.githubusercontent.com/jutongpan/paddata/master/img/Attribute/1.png" height="18" width="18">
+              </button>
+            
+              <button type="button" class="btn radiobtn btn-default">
+                <input type="radio" name="selectMainAtt" value="水">
+                <img src="https://raw.githubusercontent.com/jutongpan/paddata/master/img/Attribute/2.png" height="18" width="18">
+              </button>
+            
+              <button type="button" class="btn radiobtn btn-default">
+                <input type="radio" name="selectMainAtt" value="木">
+                <img src="https://raw.githubusercontent.com/jutongpan/paddata/master/img/Attribute/3.png" height="18" width="18">
+              </button>
+            
+              <button type="button" class="btn radiobtn btn-default">
+                <input type="radio" name="selectMainAtt" value="光">
+                <img src="https://raw.githubusercontent.com/jutongpan/paddata/master/img/Attribute/4.png" height="18" width="18">
+              </button>
+            
+              <button type="button" class="btn radiobtn btn-default">
+                <input type="radio" name="selectMainAtt" value="暗">
+                <img src="https://raw.githubusercontent.com/jutongpan/paddata/master/img/Attribute/5.png" height="18" width="18">
+              </button>
+              
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="selectSubAtt">Sub Attribute</label>
+          <br>
+          <div id="selectSubAtt" class="radioGroupButtons" style="margin-top: 3px; margin-bottom: 3px; ">
+            <div class="btn-group" data-toggle="buttons" role="group">
+
+              <button type="button" class="btn radiobtn btn-default active">
+                <input type="radio" name="selectSubAtt" value="Any" checked="checked">
+                Any
+              </button>
+              
+              <button type="button" class="btn radiobtn btn-default">
+                <input type="radio" name="selectSubAtt" value="火">
+                <img src="https://raw.githubusercontent.com/jutongpan/paddata/master/img/Attribute/1.png" height="18" width="18">
+              </button>
+            
+              <button type="button" class="btn radiobtn btn-default">
+                <input type="radio" name="selectSubAtt" value="水">
+                <img src="https://raw.githubusercontent.com/jutongpan/paddata/master/img/Attribute/2.png" height="18" width="18">
+              </button>
+            
+              <button type="button" class="btn radiobtn btn-default">
+                <input type="radio" name="selectSubAtt" value="木">
+                <img src="https://raw.githubusercontent.com/jutongpan/paddata/master/img/Attribute/3.png" height="18" width="18">
+              </button>
+            
+              <button type="button" class="btn radiobtn btn-default">
+                <input type="radio" name="selectSubAtt" value="光">
+                <img src="https://raw.githubusercontent.com/jutongpan/paddata/master/img/Attribute/4.png" height="18" width="18">
+              </button>
+            
+              <button type="button" class="btn radiobtn btn-default">
+                <input type="radio" name="selectSubAtt" value="暗">
+                <img src="https://raw.githubusercontent.com/jutongpan/paddata/master/img/Attribute/5.png" height="18" width="18">
+              </button>
+
+              <button type="button" class="btn radiobtn btn-default">
+                <input type="radio" name="selectSubAtt" value="None">
+                None
+              </button>
+              
+            </div>
+          </div>
+        </div>
+
+        <label for = "TopN">Show Results</label>
+        <div>
+          <select id = "TopN" class='form-control'>
+            <option>Top 10</option>
+            <option selected = "selected">Top 50</option>
+            <option>Top 100</option>
+            <option>All</option>
+          </select>
+        </div>
+        
+        <br>
+
+        <div>
+          <button type="submit" class="btn btn-default">Submit</button>
+        </div>
+
+      </form>
+
+    </div>
+
+    <div id="results"></div>
+
+    <br>
+
+    <div id="monDataViewer"></div>
+
+  </div>
+</body>
+</html>
