@@ -2,12 +2,18 @@ $(document).ready(function() {
 
 	$('#filter').on('submit', function(event) {
 
+		var selectedAwokenSkillIds = $('div#selected_awokenskills > button').map(function() {
+			return $(this).val();
+		}).get();
+
 		$.ajax({
-			data: {
-				'MainAtt' : $('input[name=selectMainAtt]:checked').val(),
-				'SubAtt'  : $('input[name=selectSubAtt]:checked').val(),
-				'TopN'    : $('select#TopN').val()
-			},
+			data: JSON.stringify({
+				MainAtt : $('input[name=selectMainAtt]:checked').val(),
+				SubAtt  : $('input[name=selectSubAtt]:checked').val(),
+				Awoken  : selectedAwokenSkillIds,
+				TopN    : $('select#TopN').val()
+			}),
+			contentType: 'application/json;charset=UTF-8',
 			type: 'POST',
 			url: '/monSearch1',
 		})

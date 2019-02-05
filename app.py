@@ -30,15 +30,23 @@ conn.close()
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    AwokenSkillIds = df_awoken.AwokenSkillId.unique()
+    AwokenSkillIds.sort()
+
+    return render_template(
+        'index.html',
+        img_source = img_source,
+        AwokenSkillIds = AwokenSkillIds
+        )
 
 
 @app.route('/monSearch1', methods=['POST'])
 def monSearch1():
 
-    MainAtt = request.form['MainAtt']
-    SubAtt  = request.form['SubAtt']
-    TopN    = request.form['TopN']
+    MainAtt = request.json['MainAtt']
+    SubAtt  = request.json['SubAtt']
+    Awoken  = request.json['Awoken']
+    TopN    = request.json['TopN']
 
     if MainAtt=="Any":
         dff = df_monster
@@ -49,6 +57,12 @@ def monSearch1():
         dff = dff[dff.SubAtt.isna()]
     elif SubAtt!="Any":
         dff = dff[dff.SubAtt==SubAtt]
+
+    if Awoken:
+        Awoken = [int(i) for i in Awoken]
+        MonsterIdByAwoken = df_awoken[df_awoken.AwokenSkillId.isin(Awoken)].MonsterId.tolist()
+        if MonsterIdByAwoken:
+            dff = dff[dff.MonsterId.isin(MonsterIdByAwoken)]
 
     if TopN!="All":
         dff = dff.nlargest(n = int(re.search('[0-9]+', TopN)[0]), columns = 'MonsterId')
@@ -68,7 +82,6 @@ def monSearch1():
 @app.route('/monData', methods=['POST'])
 def monData():
 
-    print(request.json)
     MonsterId = int(request.json['ID'])
 
     Monster = df_monster[df_monster.MonsterId==MonsterId].to_dict('records')[0]

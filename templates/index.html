@@ -111,16 +111,37 @@
           </div>
         </div>
 
-        <label for="TopN">Show Results</label>
-        <div>
-          <select id="TopN" class="selectpicker" data-width="auto">
-            <option>Top 10</option>
-            <option selected = "selected">Top 50</option>
-            <option>Top 100</option>
-            <option>All</option>
-          </select>
+        <div style="display:flex; flex-wrap:wrap;">
+          <div id="selected_awokenskills" style="align-self:center;">
+
+          </div>
+          <div style="padding-left: 10px;">
+            <button type="button" name="ClearAwokenSkill" class="btn btn-default btn-sm">Clear</button>
+          </div>
         </div>
-        
+
+        <div style="padding-top: 5px;">
+          <div class="btn-toolbar" role="toolbar" aria-label="...">
+            {% for AwokenSkillId in AwokenSkillIds %}
+              <button type="button" name="AwokenSkillSelector" class="btn btn-default" value="{{ AwokenSkillId }}" style="padding: 5px;">
+                <img src='{{ img_source }}img/AwokenSkill/{{ AwokenSkillId }}.png' width='20'>
+              </button>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div>
+          <label for="TopN">Show Results</label>
+          <div>
+            <select id="TopN" class="selectpicker" data-width="auto">
+              <option>Top 10</option>
+              <option selected = "selected">Top 50</option>
+              <option>Top 100</option>
+              <option>All</option>
+            </select>
+          </div>
+        </div>
+
         <br>
 
         <div>
@@ -143,6 +164,20 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/bootstrap-select.min.js"></script>
   <script src="{{ url_for('static', filename='js/form.js') }}"></script>
+  <script type="text/javascript">
+    $('button[name=AwokenSkillSelector]').click(function() {
+      var ASID = $(this).val();
+      $('div#selected_awokenskills').append(
+        '<button type="button" class="btn btn-default" value="' + ASID + '" style="padding: 0px;">' +
+          "<img src='{{ img_source }}img/AwokenSkill/" + ASID + ".png' width='20'>" +
+        '</button>'
+      );
+    });
+
+    $('button[name=ClearAwokenSkill]').click(function() {
+      $('div#selected_awokenskills').empty();
+    })
+  </script>
 
 </body>
 </html>
