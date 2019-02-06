@@ -25,7 +25,9 @@ $(document).ready(function() {
 			}
 			else {
 				$('#results').html(output.Monster);
-			}
+			};
+
+			$('#results')[0].scrollIntoView();
 
 		});
 
@@ -50,7 +52,9 @@ $(document).ready(function() {
 			}
 			else {
 				$('#monDataViewer').html(output);
-			}
+			};
+
+			$('#monDataViewer')[0].scrollIntoView();
 
 		});
 
