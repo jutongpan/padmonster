@@ -116,12 +116,17 @@
           <div id="selected_awokenskills" style="align-self:center;">
 
           </div>
+
           <div style="padding-left: 10px;">
-            <button type="button" name="ClearAwokenSkill" class="btn btn-default btn-sm">Clear</button>
+            <button type="button" id="ClearAwokenSkill" class="btn btn-default btn-sm">Clear</button>
+          </div>
+
+          <div style="padding-left: 10px;">
+            <button type="button" id="CollapseAwokenSkillSelector" class="btn btn-default btn-sm" data-toggle="collapse" data-target="#AwokenSkillSelectors">Collapse</button>
           </div>
         </div>
 
-        <div style="padding-top: 5px;">
+        <div id="AwokenSkillSelectors" style="padding-top: 5px;" class="collapse in">
           <div class="btn-toolbar" role="toolbar" aria-label="...">
             {% for AwokenSkillId in AwokenSkillIds %}
               <button type="button" name="AwokenSkillSelector" class="btn btn-default" value="{{ AwokenSkillId }}" style="padding: 5px;">
@@ -174,7 +179,7 @@
       );
     });
 
-    $('button[name=ClearAwokenSkill]').click(function() {
+    $('button#ClearAwokenSkill').click(function() {
       $('div#selected_awokenskills').empty();
     })
   </script>
