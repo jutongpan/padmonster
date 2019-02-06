@@ -16,10 +16,13 @@ df_monster['Weighted'] = df_monster['Hp']/10 + df_monster['Atk']/5 + df_monster[
 df_monster['Weighted110'] = df_monster['Hp110']/10 + df_monster['Atk110']/5 + df_monster['Rcv110']/3
 
 df_awoken = pd.read_sql_query("select * from AwokenSkillRelation;", conn)
+AwokenSkillIds_ALL = df_awoken.AwokenSkillId.unique()
+AwokenSkillIds_ALL.sort()
 df_countAS_byMonAS = df_awoken.groupby(['MonsterId','AwokenSkillId']).size().reset_index(name='counts')
 df_countAS_byMonASSuper = df_awoken.groupby(['MonsterId','AwokenSkillId', 'SuperAwoken']).size().reset_index(name='counts')
 
 df_type = pd.read_sql_query("select * from TypeRelation;", conn)
+TypeIds_All = pd.read_sql_query("select TypeId from Type;", conn).TypeId.tolist()
 
 df_activeskill = pd.read_sql_query("select * from ActiveSkill;", conn)
 df_activeskill['ActiveSkillDescription'] = df_activeskill['ActiveSkillDescription'].str.replace('<img src="img', ''.join(['<img src="', img_source, 'img']))
@@ -32,13 +35,11 @@ conn.close()
 
 @app.route('/')
 def index():
-    AwokenSkillIds = df_awoken.AwokenSkillId.unique()
-    AwokenSkillIds.sort()
-
     return render_template(
         'index.html',
         img_source = img_source,
-        AwokenSkillIds = AwokenSkillIds
+        AwokenSkillIds = AwokenSkillIds_ALL,
+        TypeIds = TypeIds_All
         )
 
 

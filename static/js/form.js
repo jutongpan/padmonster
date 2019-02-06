@@ -6,6 +6,10 @@ $(document).ready(function() {
 			return $(this).val();
 		}).get();
 
+		var selectedTypes = $('div#Type > input').map(function() {
+			return $(this).val();
+		}).get();
+
 		$.ajax({
 			data: JSON.stringify({
 				MainAtt    : $('input[name=selectMainAtt]:checked').val(),

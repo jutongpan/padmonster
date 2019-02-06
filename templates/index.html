@@ -17,6 +17,9 @@
     .toggle-on {
       background-color: #5cb85c;
     }
+    .checkbtn {
+      padding: 4px;
+    }
   </style>
 
 </head>
@@ -109,6 +112,18 @@
               </button>
               
             </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Type</label>
+          <div class="btn-group" id="Type">
+            {% for TypeId in TypeIds %}
+              <label class="btn btn-default checkbtn">
+                <input type="checkbox" value="{{ TypeId }}">
+                <img src='{{ img_source }}img/Type/{{ TypeId }}.png' width='22'>
+              </label>
+            {% endfor %}
           </div>
         </div>
 
