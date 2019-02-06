@@ -45,10 +45,11 @@ def index():
 @app.route('/monSearch1', methods=['POST'])
 def monSearch1():
 
-    MainAtt = request.json['MainAtt']
-    SubAtt  = request.json['SubAtt']
-    Awoken  = request.json['Awoken']
-    TopN    = request.json['TopN']
+    MainAtt   = request.json['MainAtt']
+    SubAtt    = request.json['SubAtt']
+    Awoken    = request.json['Awoken']
+    IncSuper  = request.json['IncSuper']
+    TopN      = request.json['TopN']
 
     if MainAtt=="Any":
         dff = df_monster
@@ -62,13 +63,20 @@ def monSearch1():
 
     if Awoken:
         Awoken = [int(i) for i in Awoken]
-        MonsterIdByAllAwoken_listoflists = [df_countAS_byMonAS[(df_countAS_byMonAS.AwokenSkillId==i) & (df_countAS_byMonAS.counts>=Awoken.count(i))].MonsterId.tolist() for i in list(set(Awoken))]
         MonsterIdByNonSuperAwoken_listoflists = [df_countAS_byMonASSuper[(df_countAS_byMonASSuper.SuperAwoken==0) & (df_countAS_byMonASSuper.AwokenSkillId==i) & (df_countAS_byMonASSuper.counts>=Awoken.count(i))].MonsterId.tolist() for i in list(set(Awoken))]
-        MonsterIdDiff_listofsets = [set.difference(set(MonsterIdByAllAwoken_listoflists[i]), set(MonsterIdByNonSuperAwoken_listoflists[i])) for i in range(len(set(Awoken)))]
-        MonsterIdDiffIntersec = set.intersection(*MonsterIdDiff_listofsets)
-        MonsterIdByAllAwoken = set.intersection(*map(set, MonsterIdByAllAwoken_listoflists))
-        MonsterIdByAwokenIncOneSup = list(set.difference(MonsterIdByAllAwoken, MonsterIdDiffIntersec))
-        dff = dff[dff.MonsterId.isin(MonsterIdByAwokenIncOneSup)]
+        if IncSuper==False:
+            MonsterIdByNonSuperAwoken = list(set.intersection(*map(set, MonsterIdByNonSuperAwoken_listoflists)))
+            dff = dff[dff.MonsterId.isin(MonsterIdByNonSuperAwoken)]
+        else:
+            MonsterIdByAllAwoken_listoflists = [df_countAS_byMonAS[(df_countAS_byMonAS.AwokenSkillId==i) & (df_countAS_byMonAS.counts>=Awoken.count(i))].MonsterId.tolist() for i in list(set(Awoken))]
+            MonsterIdDiff_listofsets = [set.difference(set(MonsterIdByAllAwoken_listoflists[i]), set(MonsterIdByNonSuperAwoken_listoflists[i])) for i in range(len(set(Awoken)))]
+            if len(set(Awoken))>1:
+                MonsterIdDiffIntersec = set.intersection(*MonsterIdDiff_listofsets)
+            else:
+                MonsterIdDiffIntersec = set()
+            MonsterIdByAllAwoken = set.intersection(*map(set, MonsterIdByAllAwoken_listoflists))
+            MonsterIdByAwokenIncOneSup = list(set.difference(MonsterIdByAllAwoken, MonsterIdDiffIntersec))
+            dff = dff[dff.MonsterId.isin(MonsterIdByAwokenIncOneSup)]
 
     if TopN!="All":
         dff = dff.nlargest(n = int(re.search('[0-9]+', TopN)[0]), columns = 'MonsterId')

@@ -121,8 +121,15 @@
             <button type="button" id="ClearAwokenSkill" class="btn btn-default btn-sm">Clear</button>
           </div>
 
+          <div style="padding-left: 10px; align-self: center;">
+            <label for="IncSuper" style="font-size: 11px; font-weight: normal;">
+              <input type="checkbox" id="IncSuper" checked data-toggle="toggle" data-size="small" data-on="Include" data-off="Exclude" data-onstyle="default">
+              Super Awoken
+            </label>
+          </div>
+
           <div style="padding-left: 10px;">
-            <button type="button" id="CollapseAwokenSkillSelector" class="btn btn-default btn-sm" data-toggle="collapse" data-target="#AwokenSkillSelectors">Collapse</button>
+            <button type="button" id="CollapseAwokenSkillSelector" class="btn btn-default btn-sm" data-toggle="collapse" data-target="#AwokenSkillSelectors">Collapse/Expand List of Awoken Skills</button>
           </div>
         </div>
 
@@ -130,7 +137,7 @@
           <div class="btn-toolbar" role="toolbar" aria-label="...">
             {% for AwokenSkillId in AwokenSkillIds %}
               <button type="button" name="AwokenSkillSelector" class="btn btn-default" value="{{ AwokenSkillId }}" style="padding: 5px;">
-                <img src='{{ img_source }}img/AwokenSkill/{{ AwokenSkillId }}.png' width='20'>
+                <img src='{{ img_source }}img/AwokenSkill/{{ AwokenSkillId }}.png' width='21'>
               </button>
             {% endfor %}
           </div>
@@ -148,7 +155,7 @@
         <br>
 
         <div>
-          <button type="submit" class="btn btn-default">Submit</button>
+          <button type="submit" class="btn btn-info">Submit</button>
         </div>
 
       </form>
@@ -166,6 +173,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/bootstrap-select.min.js"></script>
+  <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+  <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
   <script src="{{ url_for('static', filename='js/form.js') }}"></script>
   <script type="text/javascript">
     // $('.selectpicker').selectpicker('setStyle', 'btn-default btn-sm');

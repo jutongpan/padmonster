@@ -8,10 +8,11 @@ $(document).ready(function() {
 
 		$.ajax({
 			data: JSON.stringify({
-				MainAtt : $('input[name=selectMainAtt]:checked').val(),
-				SubAtt  : $('input[name=selectSubAtt]:checked').val(),
-				Awoken  : selectedAwokenSkillIds,
-				TopN    : $('select#TopN').val()
+				MainAtt    : $('input[name=selectMainAtt]:checked').val(),
+				SubAtt     : $('input[name=selectSubAtt]:checked').val(),
+				Awoken     : selectedAwokenSkillIds,
+				IncSuper   : $('#IncSuper').is(':checked'),
+				TopN       : $('select#TopN').val()
 			}),
 			contentType: 'application/json;charset=UTF-8',
 			type: 'POST',
