@@ -54,6 +54,7 @@ def monSearch1():
     Type      = request.json['Type']
     Awoken    = request.json['Awoken']
     IncSuper  = request.json['IncSuper']
+    SortBy    = request.json['SortBy']
     TopN      = request.json['TopN']
 
     if MainAtt=="Any":
@@ -89,7 +90,7 @@ def monSearch1():
             dff = dff[dff.MonsterId.isin(MonsterIdByAwokenIncOneSup)]
 
     if TopN!="All":
-        dff = dff.nlargest(n = int(re.search('[0-9]+', TopN)[0]), columns = 'MonsterId')
+        dff = dff.nlargest(n = int(re.search('[0-9]+', TopN)[0]), columns = SortBy)
 
     MonsterId = dff.MonsterId.tolist()
 

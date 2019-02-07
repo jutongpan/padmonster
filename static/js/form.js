@@ -41,6 +41,7 @@ $(document).ready(function() {
 				Type       : selectedTypes,
 				Awoken     : selectedAwokenSkillIds,
 				IncSuper   : $('#IncSuper').val(),
+				SortBy     : $('select#SortBy').val(),
 				TopN       : $('select#TopN').val()
 			}),
 			contentType: 'application/json;charset=UTF-8',

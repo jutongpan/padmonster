@@ -109,7 +109,7 @@
 
             <div>
               <select id="IncSuper" class="selectpicker" data-width="auto">
-                <option selected = "selected">Include Super Awoken</option>
+                <option selected>Include Super Awoken</option>
                 <option>Exclude Super Awoken</option>
               </select>
             </div>
@@ -132,13 +132,30 @@
 
         </div>
 
-        <div class="form-group">
-          <select id="TopN" class="selectpicker" data-width="auto">
-            <option>Top 10</option>
-            <option selected = "selected">Top 50</option>
-            <option>Top 100</option>
-            <option>All</option>
-          </select>
+        <div class="form-group" style="display: flex;">
+          <div>
+            <label for="SortBy">Sort by</label>
+            <select id="SortBy" class="selectpicker" data-width="auto">
+              <option value="MonsterId" selected>ID</option>
+              <option value="Hp">HP(LvMax)</option>
+              <option value="Atk">ATK(LvMax)</option>
+              <option value="Rcv">RCV(LvMax)</option>
+              <option value="Weighted">Weighted(LvMax)</option>
+              <option value="Hp110">HP(Lv110)</option>
+              <option value="Atk110">ATK(Lv110)</option>
+              <option value="Rcv110">RCV(Lv110)</option>
+              <option value="Weighted110">Weighted(Lv110)</option>
+            </select>
+          </div>
+          <div>
+            <label for="TopN">Show Results</label>
+            <select id="TopN" class="selectpicker" data-width="auto">
+              <option>Top 10</option>
+              <option selected>Top 50</option>
+              <option>Top 100</option>
+              <option>All</option>
+            </select>
+          </div>
         </div>
 
         <div>
