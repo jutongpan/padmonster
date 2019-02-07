@@ -71,7 +71,7 @@ def monSearch1():
     if Awoken:
         Awoken = [int(i) for i in Awoken]
         MonsterIdByNonSuperAwoken_listoflists = [df_countAS_byMonASSuper[(df_countAS_byMonASSuper.SuperAwoken==0) & (df_countAS_byMonASSuper.AwokenSkillId==i) & (df_countAS_byMonASSuper.counts>=Awoken.count(i))].MonsterId.tolist() for i in list(set(Awoken))]
-        if IncSuper==False:
+        if IncSuper=="Exclude Super Awoken":
             MonsterIdByNonSuperAwoken = list(set.intersection(*map(set, MonsterIdByNonSuperAwoken_listoflists)))
             dff = dff[dff.MonsterId.isin(MonsterIdByNonSuperAwoken)]
         else:

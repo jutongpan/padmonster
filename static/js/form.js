@@ -1,3 +1,27 @@
+function populateDataViewer(el){
+
+	$.ajax({
+		data: JSON.stringify({
+			ID : $(el).find('input[type="hidden"]').val()
+		}),
+		contentType: 'application/json;charset=UTF-8',
+		type: 'POST',
+		url: '/monData',
+	})
+	.done(function(output) {
+
+		if (output.error) {
+			$('#monDataViewer').text(output.error);
+		}
+		else {
+			$('#monDataViewer').html(output);
+		};
+
+	});
+
+}
+
+
 $(document).ready(function() {
 
 	$('#filter').on('submit', function(event) {
@@ -16,7 +40,7 @@ $(document).ready(function() {
 				SubAtt     : $('input[name=selectSubAtt]:checked').val(),
 				Type       : selectedTypes,
 				Awoken     : selectedAwokenSkillIds,
-				IncSuper   : $('#IncSuper').is(':checked'),
+				IncSuper   : $('#IncSuper').val(),
 				TopN       : $('select#TopN').val()
 			}),
 			contentType: 'application/json;charset=UTF-8',
@@ -30,6 +54,7 @@ $(document).ready(function() {
 			}
 			else {
 				$('#results').html(output.Monster);
+				populateDataViewer($('#results > button')[0]);
 			};
 
 			$('#results')[0].scrollIntoView();
@@ -42,26 +67,9 @@ $(document).ready(function() {
 
 	$('#results').on('click', 'button', function(event) {
 		
-		$.ajax({
-			data: JSON.stringify({
-				ID : $(this).find('input[type="hidden"]').val()
-			}),
-			contentType: 'application/json;charset=UTF-8',
-			type: 'POST',
-			url: '/monData',
-		})
-		.done(function(output) {
+		populateDataViewer($(this));
 
-			if (output.error) {
-				$('#monDataViewer').text(output.error);
-			}
-			else {
-				$('#monDataViewer').html(output);
-			};
-
-			$('#monDataViewer')[0].scrollIntoView();
-
-		});
+		$('#monDataViewer')[0].scrollIntoView();
 
 		event.preventDefault();
 
