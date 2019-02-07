@@ -30,9 +30,10 @@ $(document).ready(function() {
 			}
 			else {
 				$('#results').html(output.Monster);
+				$('#results').load(function() {
+					$(this).scrollIntoView();
+				})
 			};
-
-			$('#results')[0].scrollIntoView();
 
 		});
 
@@ -57,9 +58,10 @@ $(document).ready(function() {
 			}
 			else {
 				$('#monDataViewer').html(output);
+				$('#monDataViewer').load(function() {
+					$(this).scrollIntoView();
+				})
 			};
-
-			$('#monDataViewer')[0].scrollIntoView();
 
 		});
 
