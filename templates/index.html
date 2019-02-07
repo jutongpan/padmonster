@@ -97,15 +97,18 @@
 
           <label>Awoken Skills</label>
 
-          <div style="display:flex; flex-wrap:wrap;">
-            
-            <div id="selected_awokenskills" style="align-self:center;">
+          <table>
+            <tr>
+              <td style="width:80%">
+                <div id="selected_awokenskills"></div>
+              </td>
+              <td style="width:20%">
+                <button type="button" id="ClearAwokenSkill" class="btn btn-default btn-sm">Clear</button>
+              </td>
+            </tr>
+          </table>
 
-            </div>
-
-            <div style="padding-left: 10px;">
-              <button type="button" id="ClearAwokenSkill" class="btn btn-default btn-sm">Clear</button>
-            </div>
+          <div style="display: flex; flex-wrap: wrap; padding-top: 5px;">
 
             <div>
               <select id="IncSuper" class="selectpicker" data-width="auto">
@@ -115,7 +118,7 @@
             </div>
 
             <div style="padding-left: 10px;">
-              <button type="button" id="CollapseAwokenSkillSelector" class="btn btn-default btn-sm" data-toggle="collapse" data-target="#AwokenSkillSelectors">Collapse/Expand List of Awoken Skills</button>
+              <button type="button" id="CollapseAwokenSkillSelector" class="btn btn-default btn-sm" data-toggle="collapse" data-target="#AwokenSkillSelectors">Show/Hide List</button>
             </div>
 
           </div>
@@ -184,8 +187,8 @@
     $('button[name=AwokenSkillSelector]').click(function() {
       var ASID = $(this).val();
       $('div#selected_awokenskills').append(
-        '<button type="button" class="btn btn-default" value="' + ASID + '" style="padding: 0px;">' +
-          "<img src='{{ img_source }}img/AwokenSkill/" + ASID + ".png' width='20'>" +
+        '<button type="button" class="btn btn-default" value="' + ASID + '" style="padding: 0px; margin-right: 1px;">' +
+          "<img src='{{ img_source }}img/AwokenSkill/" + ASID + ".png' width='25'>" +
         '</button>'
       );
     });
