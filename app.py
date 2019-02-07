@@ -48,6 +48,7 @@ def monSearch1():
 
     MainAtt   = request.json['MainAtt']
     SubAtt    = request.json['SubAtt']
+    Type      = request.json['Type']
     Awoken    = request.json['Awoken']
     IncSuper  = request.json['IncSuper']
     TopN      = request.json['TopN']
@@ -61,6 +62,11 @@ def monSearch1():
         dff = dff[dff.SubAtt.isna()]
     elif SubAtt!="Any":
         dff = dff[dff.SubAtt==SubAtt]
+
+    if Type:
+        Type = [int(i) for i in Type]
+        MonsterIdByType = df_type[df_type.TypeId.isin(Type)].MonsterId.tolist()
+        dff = dff[dff.MonsterId.isin(MonsterIdByType)]
 
     if Awoken:
         Awoken = [int(i) for i in Awoken]

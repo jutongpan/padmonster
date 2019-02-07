@@ -6,7 +6,7 @@ $(document).ready(function() {
 			return $(this).val();
 		}).get();
 
-		var selectedTypes = $('div#Type > input').map(function() {
+		var selectedTypes = $('div#Type').find('input[type=checkbox]:checked').map(function() {
 			return $(this).val();
 		}).get();
 
@@ -14,6 +14,7 @@ $(document).ready(function() {
 			data: JSON.stringify({
 				MainAtt    : $('input[name=selectMainAtt]:checked').val(),
 				SubAtt     : $('input[name=selectSubAtt]:checked').val(),
+				Type       : selectedTypes,
 				Awoken     : selectedAwokenSkillIds,
 				IncSuper   : $('#IncSuper').is(':checked'),
 				TopN       : $('select#TopN').val()
