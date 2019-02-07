@@ -42,31 +42,13 @@
                 <input type="radio" name="selectMainAtt" value="Any" checked="checked">
                 Any
               </button>
-              
-              <button type="button" class="btn radiobtn btn-default" style="padding-left: 10px; padding-right: 10px;">
-                <input type="radio" name="selectMainAtt" value="火">
-                <img src="https://raw.githubusercontent.com/jutongpan/paddata/master/img/Attribute/1.png" height="18" width="18">
-              </button>
-            
-              <button type="button" class="btn radiobtn btn-default" style="padding-left: 10px; padding-right: 10px;">
-                <input type="radio" name="selectMainAtt" value="水">
-                <img src="https://raw.githubusercontent.com/jutongpan/paddata/master/img/Attribute/2.png" height="18" width="18">
-              </button>
-            
-              <button type="button" class="btn radiobtn btn-default" style="padding-left: 10px; padding-right: 10px;">
-                <input type="radio" name="selectMainAtt" value="木">
-                <img src="https://raw.githubusercontent.com/jutongpan/paddata/master/img/Attribute/3.png" height="18" width="18">
-              </button>
-            
-              <button type="button" class="btn radiobtn btn-default" style="padding-left: 10px; padding-right: 10px;">
-                <input type="radio" name="selectMainAtt" value="光">
-                <img src="https://raw.githubusercontent.com/jutongpan/paddata/master/img/Attribute/4.png" height="18" width="18">
-              </button>
-            
-              <button type="button" class="btn radiobtn btn-default" style="padding-left: 10px; padding-right: 10px;">
-                <input type="radio" name="selectMainAtt" value="暗">
-                <img src="https://raw.githubusercontent.com/jutongpan/paddata/master/img/Attribute/5.png" height="18" width="18">
-              </button>
+
+              {% for Att in Attributes %}
+                <button type="button" class="btn radiobtn btn-default" style="padding-left: 10px; padding-right: 10px;">
+                  <input type="radio" name="selectMainAtt" value="{{ Att }}">
+                  <img src="https://raw.githubusercontent.com/jutongpan/paddata/master/img/Attribute/{{ loop.index }}.png" height="18" width="18">
+                </button>
+              {% endfor %}
               
             </div>
           </div>
@@ -82,30 +64,12 @@
                 Any
               </button>
               
-              <button type="button" class="btn radiobtn btn-default" style="padding-left: 10px; padding-right: 10px;">
-                <input type="radio" name="selectSubAtt" value="火">
-                <img src="https://raw.githubusercontent.com/jutongpan/paddata/master/img/Attribute/1.png" height="18" width="18">
-              </button>
-            
-              <button type="button" class="btn radiobtn btn-default" style="padding-left: 10px; padding-right: 10px;">
-                <input type="radio" name="selectSubAtt" value="水">
-                <img src="https://raw.githubusercontent.com/jutongpan/paddata/master/img/Attribute/2.png" height="18" width="18">
-              </button>
-            
-              <button type="button" class="btn radiobtn btn-default" style="padding-left: 10px; padding-right: 10px;">
-                <input type="radio" name="selectSubAtt" value="木">
-                <img src="https://raw.githubusercontent.com/jutongpan/paddata/master/img/Attribute/3.png" height="18" width="18">
-              </button>
-            
-              <button type="button" class="btn radiobtn btn-default" style="padding-left: 10px; padding-right: 10px;">
-                <input type="radio" name="selectSubAtt" value="光">
-                <img src="https://raw.githubusercontent.com/jutongpan/paddata/master/img/Attribute/4.png" height="18" width="18">
-              </button>
-            
-              <button type="button" class="btn radiobtn btn-default" style="padding-left: 10px; padding-right: 10px;">
-                <input type="radio" name="selectSubAtt" value="暗">
-                <img src="https://raw.githubusercontent.com/jutongpan/paddata/master/img/Attribute/5.png" height="18" width="18">
-              </button>
+              {% for Att in Attributes %}
+                <button type="button" class="btn radiobtn btn-default" style="padding-left: 10px; padding-right: 10px;">
+                  <input type="radio" name="selectMainAtt" value="{{ Att }}">
+                  <img src="https://raw.githubusercontent.com/jutongpan/paddata/master/img/Attribute/{{ loop.index }}.png" height="18" width="18">
+                </button>
+              {% endfor %}
 
               <button type="button" class="btn radiobtn btn-default" style="padding-left: 10px; padding-right: 10px;">
                 <input type="radio" name="selectSubAtt" value="None">

@@ -11,6 +11,8 @@ img_source = "https://raw.githubusercontent.com/jutongpan/paddata/master/"
 local_filename, headers = urllib.request.urlretrieve('https://raw.githubusercontent.com/jutongpan/paddata/master/padmonster.sqlite3')
 conn = sqlite3.connect(local_filename)
 
+Attributes_ALL = pd.read_sql_query("select AttributeName from Attribute;", conn).AttributeName.tolist()
+
 df_monster = pd.read_sql_query("select * from Monster;", conn)
 df_monster['Weighted'] = df_monster['Hp']/10 + df_monster['Atk']/5 + df_monster['Rcv']/3
 df_monster['Weighted110'] = df_monster['Hp110']/10 + df_monster['Atk110']/5 + df_monster['Rcv110']/3
@@ -38,6 +40,7 @@ def index():
     return render_template(
         'index.html',
         img_source = img_source,
+        Attributes = Attributes_ALL,
         AwokenSkillIds = AwokenSkillIds_ALL,
         TypeIds = TypeIds_All
         )
