@@ -11,15 +11,15 @@ img_source = "https://raw.githubusercontent.com/jutongpan/paddata/master/"
 local_filename, headers = urllib.request.urlretrieve('https://raw.githubusercontent.com/jutongpan/paddata/master/padmonster.sqlite3')
 conn = sqlite3.connect(local_filename)
 
-Attributes_ALL = pd.read_sql_query("select AttributeName from Attribute;", conn).AttributeName.tolist()
+Attributes_All = pd.read_sql_query("select AttributeName from Attribute;", conn).AttributeName.tolist()
 
 df_monster = pd.read_sql_query("select * from Monster;", conn)
 df_monster['Weighted'] = df_monster['Hp']/10 + df_monster['Atk']/5 + df_monster['Rcv']/3
 df_monster['Weighted110'] = df_monster['Hp110']/10 + df_monster['Atk110']/5 + df_monster['Rcv110']/3
 
 df_awoken = pd.read_sql_query("select * from AwokenSkillRelation;", conn)
-AwokenSkillIds_ALL = df_awoken.AwokenSkillId.unique()
-AwokenSkillIds_ALL.sort()
+AwokenSkillIds_All = df_awoken.AwokenSkillId.unique()
+AwokenSkillIds_All.sort()
 df_countAS_byMonAS = df_awoken.groupby(['MonsterId','AwokenSkillId']).size().reset_index(name='counts')
 df_countAS_byMonASSuper = df_awoken.groupby(['MonsterId','AwokenSkillId', 'SuperAwoken']).size().reset_index(name='counts')
 
@@ -28,6 +28,8 @@ TypeIds_All = pd.read_sql_query("select TypeId from Type;", conn).TypeId.tolist(
 
 df_activeskill = pd.read_sql_query("select * from ActiveSkill;", conn)
 df_activeskill['ActiveSkillDescription'] = df_activeskill['ActiveSkillDescription'].str.replace('<img src="img', ''.join(['<img src="', img_source, 'img']))
+
+ActiveSkillTypes_All = pd.read_sql_query("select ActiveSkillType from ActiveSkillType;", conn).ActiveSkillType.dropna().unique()
 
 df_leaderskill = pd.read_sql_query("select * from LeaderSkill;", conn)
 df_leaderskill['LeaderSkillDescription'] = df_leaderskill['LeaderSkillDescription'].str.replace('<img src="images/.+?>', '')
@@ -40,9 +42,10 @@ def index():
     return render_template(
         'index.html',
         img_source = img_source,
-        Attributes = Attributes_ALL,
-        AwokenSkillIds = AwokenSkillIds_ALL,
-        TypeIds = TypeIds_All
+        Attributes = Attributes_All,
+        TypeIds = TypeIds_All,
+        AwokenSkillIds = AwokenSkillIds_All,
+        ActiveSkillTypes = ActiveSkillTypes_All
         )
 
 
