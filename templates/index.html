@@ -192,7 +192,11 @@
 
     $('button#ClearAwokenSkill').click(function() {
       $('div#selected_awokenskills').empty();
-    })
+    });
+
+    $('div#selected_awokenskills').on('click', 'button', function() {
+      $(this).remove();
+    });
   </script>
 
 </body>
