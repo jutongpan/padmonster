@@ -77,6 +77,7 @@ $(document).ready(function() {
 			contentType: 'application/json;charset=UTF-8',
 			type: 'POST',
 			url: '/monSearch2',
+			headers: { "cache-control": "no-cache" },
 		})
 		.done(function(output) {
 
