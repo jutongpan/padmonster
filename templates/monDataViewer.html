@@ -57,34 +57,28 @@
         <table class='table table-bordered table-condensed'>
             <tbody>
                 <tr>
-                    <td>
-                      <b style="color:orange;">主動技能</b>
-                    </td>
+                    <th style="color:orange;">主動技能</th>
                     <td>{{ ActiveSkill.ActiveSkillName }}</td>
-                    <td>初始CD</td>
-                    <td>{{ '{:.0f}'.format(ActiveSkill.MaxCd) }}</td>
-                    <td>最短CD</td>
-                    <td>{{ '{:.0f}'.format(ActiveSkill.MinCd) }}</td>
+                    <th>CD</th>
+                    <td>{{ '{:.0f}'.format(ActiveSkill.MaxCd) }} -> {{ '{:.0f}'.format(ActiveSkill.MinCd) }}</td>
                 </tr>
                 <tr>
-                    <td style="text-align: left; font-size: 13px;" colspan="6">
+                    <td style="text-align: left; font-size: 13px;" colspan="4">
                         {{ ActiveSkill.ActiveSkillDescription|safe }}
                     </td>
                 </tr>
                 <tr>
-                    <td>
-                        <b style="color:orange;">隊長技能</b>
-                    </td>
-                    <td colspan="5">{{ LeaderSkill.LeaderSkillName }}</td>
+                    <th style="color:orange;">隊長技能</th>
+                    <td colspan="3">{{ LeaderSkill.LeaderSkillName }}</td>
                 </tr>
                 <tr>
-                    <td style="text-align: left; font-size: 13px;" colspan="6">
+                    <td style="text-align: left; font-size: 13px;" colspan="4">
                         {{ LeaderSkill.LeaderSkillDescription|safe }}
                     </td>
                 </tr>
                 <tr>
-                    <td>外部鏈接</td>
-                    <td style="text-align: left; padding-left: 10px;" colspan="5">
+                    <th>外部鏈接</th>
+                    <td style="text-align: left; padding-left: 10px;" colspan="3">
                         <a href="http://pad.skyozora.com/pets/{{ Monster.MonsterId }}" target="_blank">戰友網</a>
                     </td>
                 </tr>
