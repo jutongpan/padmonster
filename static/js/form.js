@@ -24,6 +24,8 @@ function populateDataViewer(el){
 
 $(document).ready(function() {
 
+	$.ajaxSetup({ cache: false });
+
 	$('#filter').on('submit', function(event) {
 
 		var selectedAwokenSkillIds = $('div#selected_awokenskills > button').map(function() {
@@ -77,7 +79,6 @@ $(document).ready(function() {
 			contentType: 'application/json;charset=UTF-8',
 			type: 'POST',
 			url: '/monSearch2',
-			headers: { "cache-control": "no-cache" },
 		})
 		.done(function(output) {
 
