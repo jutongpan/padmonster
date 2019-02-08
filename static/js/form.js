@@ -68,7 +68,7 @@ $(document).ready(function() {
 
 
 	$('#FormId').on('submit', function(event) {
-		alert($('#FromId').val());
+
 		$.ajax({
 			data: JSON.stringify({
 				FromId    : $('#FromId').val(),
