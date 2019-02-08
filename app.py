@@ -107,6 +107,36 @@ def monSearch1():
     return jsonify(error='No match!')
 
 
+@app.route('/monSearch2', methods=['POST'])
+def monSearch2():
+
+    FromId  = request.json['FromId']
+    ToId    = request.json['ToId']
+
+    if FromId:
+        if ToId:
+            MonsterId = list(range(int(FromId), int(ToId)+1))
+        else:
+            MonsterId = [int(FromId)]
+    elif ToId:
+        MonsterId = [int(ToId)]
+    else:
+        MonsterId = []
+
+    dff = df_monster[df_monster.MonsterId.isin(MonsterId)]
+
+    MonsterId = dff.MonsterId.tolist()
+
+    MonsterIcon_source = [None] * len(MonsterId)
+    for x in range(len(MonsterId)):
+        MonsterIcon_source[x] = "".join(["<button class='btn btn-default btn-monster'><input type='hidden' value=", str(MonsterId[x]), "><img src=", img_source, "img/MonsterIcon/", str(MonsterId[x]), ".png width='47'></button>"])
+
+    if MonsterId:
+        return jsonify(Monster=MonsterIcon_source)
+
+    return jsonify(error='No match!')
+
+
 @app.route('/monData', methods=['POST'])
 def monData():
 

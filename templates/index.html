@@ -4,7 +4,7 @@
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
   <title>PAD Monsters</title>
 
@@ -32,157 +32,183 @@
 
     <div class="well">
 
-      <form id="filter">
-        <div class="form-group">
-          <label for="selectMainAtt">Main Attribute</label>
-          <div id="selectMainAtt">
-            <div class="btn-group" data-toggle="buttons" role="group">
+      <div >
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#SearchByFilter" data-toggle="tab" aria-expanded="true">Search by Filter</a></li>
+          <li class=""><a href="#SearchById" data-toggle="tab" aria-expanded="false">Search by ID</a></li>
+        </ul>       
+      </div>
 
-              <button type="button" class="btn radiobtn btn-default active" style="padding-left: 10px; padding-right: 10px; ">
-                <input type="radio" name="selectMainAtt" value="Any" checked="checked">
-                Any
-              </button>
+      <div class="tab-content" style="padding-top: 10px;">
+        <div class="tab-pane fade active in" id="SearchByFilter">
 
-              {% for Att in Attributes %}
-                <button type="button" class="btn radiobtn btn-default" style="padding-left: 10px; padding-right: 10px;">
-                  <input type="radio" name="selectMainAtt" value="{{ Att }}">
-                  <img src="https://raw.githubusercontent.com/jutongpan/paddata/master/img/Attribute/{{ loop.index }}.png" height="18" width="18">
-                </button>
-              {% endfor %}
-              
+          <form id="filter">
+            <div class="form-group">
+              <label for="selectMainAtt">Main Attribute</label>
+              <div id="selectMainAtt">
+                <div class="btn-group" data-toggle="buttons" role="group">
+
+                  <button type="button" class="btn radiobtn btn-default active" style="padding-left: 10px; padding-right: 10px; ">
+                    <input type="radio" name="selectMainAtt" value="Any" checked="checked">
+                    Any
+                  </button>
+
+                  {% for Att in Attributes %}
+                    <button type="button" class="btn radiobtn btn-default" style="padding-left: 10px; padding-right: 10px;">
+                      <input type="radio" name="selectMainAtt" value="{{ Att }}">
+                      <img src="https://raw.githubusercontent.com/jutongpan/paddata/master/img/Attribute/{{ loop.index }}.png" height="18" width="18">
+                    </button>
+                  {% endfor %}
+                  
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
 
-        <div class="form-group">
-          <label for="selectSubAtt">Sub Attribute</label>
-          <div id="selectSubAtt" class="radioGroupButtons">
-            <div class="btn-group" data-toggle="buttons" role="group">
+            <div class="form-group">
+              <label for="selectSubAtt">Sub Attribute</label>
+              <div id="selectSubAtt" class="radioGroupButtons">
+                <div class="btn-group" data-toggle="buttons" role="group">
 
-              <button type="button" class="btn radiobtn btn-default active" style="padding-left: 10px; padding-right: 10px;">
-                <input type="radio" name="selectSubAtt" value="Any" checked="checked">
-                Any
-              </button>
-              
-              {% for Att in Attributes %}
-                <button type="button" class="btn radiobtn btn-default" style="padding-left: 10px; padding-right: 10px;">
-                  <input type="radio" name="selectSubAtt" value="{{ Att }}">
-                  <img src="https://raw.githubusercontent.com/jutongpan/paddata/master/img/Attribute/{{ loop.index }}.png" height="18" width="18">
-                </button>
-              {% endfor %}
+                  <button type="button" class="btn radiobtn btn-default active" style="padding-left: 10px; padding-right: 10px;">
+                    <input type="radio" name="selectSubAtt" value="Any" checked="checked">
+                    Any
+                  </button>
+                  
+                  {% for Att in Attributes %}
+                    <button type="button" class="btn radiobtn btn-default" style="padding-left: 10px; padding-right: 10px;">
+                      <input type="radio" name="selectSubAtt" value="{{ Att }}">
+                      <img src="https://raw.githubusercontent.com/jutongpan/paddata/master/img/Attribute/{{ loop.index }}.png" height="18" width="18">
+                    </button>
+                  {% endfor %}
 
-              <button type="button" class="btn radiobtn btn-default" style="padding-left: 10px; padding-right: 10px;">
-                <input type="radio" name="selectSubAtt" value="None">
-                None
-              </button>
-              
+                  <button type="button" class="btn radiobtn btn-default" style="padding-left: 10px; padding-right: 10px;">
+                    <input type="radio" name="selectSubAtt" value="None">
+                    None
+                  </button>
+                  
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
 
-        <div class="form-group">
-          <label>Type</label>
-          <div class="btn-group" id="Type">
-            {% for TypeId in TypeIds %}
-              <label class="btn btn-default checkbtn">
-                <input type="checkbox" value="{{ TypeId }}">
-                <img src='{{ img_source }}img/Type/{{ TypeId }}.png' width='20'>
-              </label>
-            {% endfor %}
-          </div>
-        </div>
+            <div class="form-group">
+              <label>Type</label>
+              <div class="btn-group" id="Type">
+                {% for TypeId in TypeIds %}
+                  <label class="btn btn-default checkbtn">
+                    <input type="checkbox" value="{{ TypeId }}">
+                    <img src='{{ img_source }}img/Type/{{ TypeId }}.png' width='20'>
+                  </label>
+                {% endfor %}
+              </div>
+            </div>
 
-        
-        <div class="form-group">
+            
+            <div class="form-group">
 
-          <label>Awoken Skills</label>
+              <label>Awoken Skills</label>
 
-          <table>
-            <tr>
-              <td style="width:80%">
-                <div id="selected_awokenskills"></div>
-              </td>
-              <td style="width:20%">
-                <button type="button" id="ClearAwokenSkill" class="btn btn-default btn-sm">Clear</button>
-              </td>
-            </tr>
-          </table>
+              <table>
+                <tr>
+                  <td style="width:80%">
+                    <div id="selected_awokenskills"></div>
+                  </td>
+                  <td style="width:20%">
+                    <button type="button" id="ClearAwokenSkill" class="btn btn-default btn-sm">Clear</button>
+                  </td>
+                </tr>
+              </table>
 
-          <div style="display: flex; flex-wrap: wrap; padding-top: 5px;">
+              <div style="display: flex; flex-wrap: wrap; padding-top: 5px;">
+
+                <div>
+                  <select id="IncSuper" class="selectpicker" data-width="auto">
+                    <option selected>Include Super Awoken</option>
+                    <option>Exclude Super Awoken</option>
+                  </select>
+                </div>
+
+                <div style="padding-left: 10px;">
+                  <button type="button" id="CollapseAwokenSkillSelector" class="btn btn-default btn-sm" data-toggle="collapse" data-target="#AwokenSkillSelectors">Show/Hide List</button>
+                </div>
+
+              </div>
+
+              <div id="AwokenSkillSelectors" style="padding-top: 5px;" class="collapse in">
+                <div class="btn-toolbar" role="toolbar" aria-label="...">
+                  {% for AwokenSkillId in AwokenSkillIds %}
+                    <button type="button" name="AwokenSkillSelector" class="btn btn-default" value="{{ AwokenSkillId }}" style="padding: 5px;">
+                      <img src='{{ img_source }}img/AwokenSkill/{{ AwokenSkillId }}.png' width='21'>
+                    </button>
+                  {% endfor %}
+                </div>
+              </div>
+
+            </div>
+
+            <!-- <div class="form-group">
+              <div>
+                <button type="button" id="CollapseActiveSkill" class="btn btn-default" data-toggle="collapse" data-target="#ActiveSkill">Active Skill Types</button>
+              </div>
+
+              <div id="ActiveSkill" class="btn-group collapse">
+                {% for ActiveSkillType in ActiveSkillTypes %}
+                  <label class="btn btn-default checkbtn btn-sm">
+                    <input type="checkbox" value="{{ TypeId }}">
+                    {{ ActiveSkillType }}
+                  </label>
+                {% endfor %}
+              </div>
+            </div> -->
+
+            <div class="form-group" style="display: flex;">
+              <div>
+                <label for="SortBy">Sort by</label>
+                <select id="SortBy" class="selectpicker" data-width="auto">
+                  <option value="MonsterId" selected>ID</option>
+                  <option value="Hp">HP(LvMax)</option>
+                  <option value="Atk">ATK(LvMax)</option>
+                  <option value="Rcv">RCV(LvMax)</option>
+                  <option value="Weighted">Weighted(LvMax)</option>
+                  <option value="Hp110">HP(Lv110)</option>
+                  <option value="Atk110">ATK(Lv110)</option>
+                  <option value="Rcv110">RCV(Lv110)</option>
+                  <option value="Weighted110">Weighted(Lv110)</option>
+                </select>
+              </div>
+              <div>
+                <label for="TopN">Show Results</label>
+                <select id="TopN" class="selectpicker" data-width="auto">
+                  <option>Top 10</option>
+                  <option selected>Top 50</option>
+                  <option>Top 100</option>
+                  <option>All</option>
+                </select>
+              </div>
+            </div>
 
             <div>
-              <select id="IncSuper" class="selectpicker" data-width="auto">
-                <option selected>Include Super Awoken</option>
-                <option>Exclude Super Awoken</option>
-              </select>
+              <button type="submit" class="btn" style="background-color: #337ab7;">Submit</button>
             </div>
 
-            <div style="padding-left: 10px;">
-              <button type="button" id="CollapseAwokenSkillSelector" class="btn btn-default btn-sm" data-toggle="collapse" data-target="#AwokenSkillSelectors">Show/Hide List</button>
-            </div>
-
-          </div>
-
-          <div id="AwokenSkillSelectors" style="padding-top: 5px;" class="collapse in">
-            <div class="btn-toolbar" role="toolbar" aria-label="...">
-              {% for AwokenSkillId in AwokenSkillIds %}
-                <button type="button" name="AwokenSkillSelector" class="btn btn-default" value="{{ AwokenSkillId }}" style="padding: 5px;">
-                  <img src='{{ img_source }}img/AwokenSkill/{{ AwokenSkillId }}.png' width='21'>
-                </button>
-              {% endfor %}
-            </div>
-          </div>
+          </form>
 
         </div>
 
-{#         <div class="form-group">
-          <div>
-            <button type="button" id="CollapseActiveSkill" class="btn btn-default" data-toggle="collapse" data-target="#ActiveSkill">Active Skill Types</button>
-          </div>
-
-          <div id="ActiveSkill" class="btn-group collapse">
-            {% for ActiveSkillType in ActiveSkillTypes %}
-              <label class="btn btn-default checkbtn btn-sm">
-                <input type="checkbox" value="{{ TypeId }}">
-                {{ ActiveSkillType }}
-              </label>
-            {% endfor %}
-          </div>
-        </div> #}
-
-        <div class="form-group" style="display: flex;">
-          <div>
-            <label for="SortBy">Sort by</label>
-            <select id="SortBy" class="selectpicker" data-width="auto">
-              <option value="MonsterId" selected>ID</option>
-              <option value="Hp">HP(LvMax)</option>
-              <option value="Atk">ATK(LvMax)</option>
-              <option value="Rcv">RCV(LvMax)</option>
-              <option value="Weighted">Weighted(LvMax)</option>
-              <option value="Hp110">HP(Lv110)</option>
-              <option value="Atk110">ATK(Lv110)</option>
-              <option value="Rcv110">RCV(Lv110)</option>
-              <option value="Weighted110">Weighted(Lv110)</option>
-            </select>
-          </div>
-          <div>
-            <label for="TopN">Show Results</label>
-            <select id="TopN" class="selectpicker" data-width="auto">
-              <option>Top 10</option>
-              <option selected>Top 50</option>
-              <option>Top 100</option>
-              <option>All</option>
-            </select>
-          </div>
+        <div class="tab-pane fade" id="SearchById">
+          <form id="FormId">
+            <div class="form-group" style="display: flex;">
+              <input type="text" id="FromId" class="form-control" placeholder="From" style="width: 30%;">
+              <input type="text" id="ToId" class="form-control" placeholder="To" style="width: 30%;">
+            </div>
+            <div>
+              <button type="submit" class="btn" style="background-color: #337ab7;">Submit</button>
+            </div>
+          </form>
         </div>
 
-        <div>
-          <button type="submit" class="btn" style="background-color: #337ab7;">Submit</button>
-        </div>
-
-      </form>
-
+      </div>
     </div>
+
 
     <div id="results"></div>
 
