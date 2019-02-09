@@ -196,9 +196,11 @@
 
         <div class="tab-pane fade" id="SearchById">
           <form id="FormId">
+            <input type="checkbox" id="EnableRange">
+            <label for="EnableRange">By Range</label>
             <div class="form-group" style="display: flex;">
-              <input type="number" autocomplete="off" id="FromId" class="form-control" placeholder="From" style="width: 100px;">
-              <input type="number" autocomplete="off" id="ToId" class="form-control" placeholder="To" style="width: 100px;">
+              <input type="number" autocomplete="off" id="FromId" class="form-control" placeholder="ID" style="width: 100px;">
+              <input type="number" autocomplete="off" id="ToId" class="form-control" style="width: 100px;" disabled>
             </div>
             <div>
               <button type="submit" class="btn" style="background-color: #337ab7;">Submit</button>
@@ -240,6 +242,18 @@
 
     $('div#selected_awokenskills').on('click', 'button', function() {
       $(this).remove();
+    });
+
+    $('#EnableRange').change(function() {
+      if (this.checked) {
+        $('#ToId').prop('disabled', false);
+        $('#FromId').attr('placeholder', 'From');
+        $('#ToId').attr('placeholder', 'To');
+      } else {
+        $('#ToId').prop('disabled', true);
+        $('#FromId').attr('placeholder', 'ID');
+        $('#ToId').attr('placeholder', '');
+      };
     });
   </script>
 
