@@ -45,10 +45,10 @@
                 </tr>
                 <tr>
                     <td>110</td>
-                    <td>{{ '{:.0f}'.format(Monster.Hp110) }} </td>
-                    <td>{{ '{:.0f}'.format(Monster.Atk110) }}</td>
-                    <td>{{ '{:.0f}'.format(Monster.Rcv110) }}</td>
-                    <td>{{ '{:.0f}'.format(Monster.Weighted110) }}</td>
+                    <td>{{ '{:.0f}'.format(Monster.Hp110) if Monster.Hp110 == Monster.Hp110 else '' }} </td>
+                    <td>{{ '{:.0f}'.format(Monster.Atk110) if Monster.Atk110 == Monster.Atk110 else '' }}</td>
+                    <td>{{ '{:.0f}'.format(Monster.Rcv110) if Monster.Rcv110 == Monster.Rcv110 else '' }}</td>
+                    <td>{{ '{:.0f}'.format(Monster.Weighted110) if Monster.Weighted110 == Monster.Weighted110 else '' }}</td>
                 </tr>
             </tbody>
 
@@ -60,7 +60,11 @@
                     <th style="color:orange;">主動技能</th>
                     <td>{{ ActiveSkill.ActiveSkillName }}</td>
                     <th>CD</th>
-                    <td>{{ '{:.0f}'.format(ActiveSkill.MaxCd) }} -> {{ '{:.0f}'.format(ActiveSkill.MinCd) }}</td>
+                    {% if ActiveSkill.MaxCd==ActiveSkill.MaxCd %}
+                        <td>{{ '{:.0f}'.format(ActiveSkill.MaxCd) }} → {{ '{:.0f}'.format(ActiveSkill.MinCd) }}</td>
+                    {% else %}
+                        <td></td>
+                    {% endif %}
                 </tr>
                 <tr>
                     <td style="text-align: left; font-size: 13px;" colspan="4">
