@@ -1,7 +1,7 @@
 <div class='well well-sm'>
     <div style='display:flex; flex-wrap:wrap;'>
         <img src='{{ img_source }}img/MonsterIcon/{{ Monster.MonsterId }}.png' height='60' width='60'>
-        <div style='align-self:center; padding-left:5px; padding-top:5px;'>
+        <div style='align-self: center; padding-left: 5px; padding-top: 5px;'>
             <div>
                 <b style='font-size:15px;'>No.{{ Monster.MonsterId }} - {{ Monster.CnName }}</b>
             </div>
@@ -12,27 +12,27 @@
             </div>
         </div>
     </div>
-    <div style='padding-top:10px; padding-bottom:5px;'>
+    <div style='padding-top: 10px; padding-bottom: 5px;'>
         <b>覺醒技:</b>
         {% for AwokenSkillId in AwokenSkillIds %}
             <img src='{{ img_source }}img/AwokenSkill/{{ AwokenSkillId }}.png' width='20'>
         {% endfor %}
     </div>
-    <div style="padding-bottom:10px;">
+    <div style="padding-bottom: 10px;">
         <b>超覺醒:</b>
         {% for SuperAwokenSkillId in SuperAwokenSkillIds %}
             <img src='{{ img_source }}img/AwokenSkill/{{ SuperAwokenSkillId }}.png' width='20'>
         {% endfor %}
     </div>
     <div>
-        <table class='table table-bordered table-condensed'>
+        <table class='table table-bordered table-condensed text-center'>
             <thead>
                 <tr>
-                    <th>Lv</th>
-                    <th>HP</th>
-                    <th>ATK</th>
-                    <th>RCV</th>
-                    <th>Weighted</th>
+                    <th class="text-center">Lv</th>
+                    <th class="text-center">HP</th>
+                    <th class="text-center">ATK</th>
+                    <th class="text-center">RCV</th>
+                    <th class="text-center">Weighted</th>
                 </tr>
             </thead>
             <tbody>
@@ -45,10 +45,13 @@
                 </tr>
                 <tr>
                     <td>110</td>
-                    <td>{{ '{:.0f}'.format(Monster.Hp110) if Monster.Hp110 == Monster.Hp110 else '' }} </td>
-                    <td>{{ '{:.0f}'.format(Monster.Atk110) if Monster.Atk110 == Monster.Atk110 else '' }}</td>
-                    <td>{{ '{:.0f}'.format(Monster.Rcv110) if Monster.Rcv110 == Monster.Rcv110 else '' }}</td>
-                    <td>{{ '{:.0f}'.format(Monster.Weighted110) if Monster.Weighted110 == Monster.Weighted110 else '' }}</td>
+                    {% for item in [Monster.Hp110, Monster.Atk110, Monster.Rcv110, Monster.Weighted110] %}
+                        {% if item==item %}
+                            <td>{{ '{:.0f}'.format(item) }}</td>
+                        {% else %}
+                            <td style="color: #7A8288">NA</td>
+                        {% endif %}
+                    {% endfor %}
                 </tr>
             </tbody>
 
@@ -63,7 +66,7 @@
                     {% if ActiveSkill.MaxCd==ActiveSkill.MaxCd %}
                         <td>{{ '{:.0f}'.format(ActiveSkill.MaxCd) }} → {{ '{:.0f}'.format(ActiveSkill.MinCd) }}</td>
                     {% else %}
-                        <td></td>
+                        <td style="color: #7A8288">NA</td>
                     {% endif %}
                 </tr>
                 <tr>
