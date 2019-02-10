@@ -74,6 +74,18 @@
                         {{ ActiveSkill.ActiveSkillDescription|safe }}
                     </td>
                 </tr>
+                {% if MonsterIdSameAS %}
+                <tr>
+                    <th>同技能寵</th>
+                    <td colspan="3">
+                        {% for Id in MonsterIdSameAS %}
+                            <button class='btn btn-default btn-monster' value="{{ Id }}">
+                            <img src='{{ img_source }}img/MonsterIcon/{{ Id }}.png' height='35' width='35'>
+                            </button>
+                        {% endfor %}
+                    </td>
+                </tr>
+                {% endif %}
                 <tr>
                     <th style="color:orange;">隊長技能</th>
                     <td colspan="3">{{ LeaderSkill.LeaderSkillName }}</td>

@@ -124,7 +124,7 @@ def monSearch1():
 
     MonsterIcon_source = [None] * len(MonsterId)
     for x in range(len(MonsterId)):
-        MonsterIcon_source[x] = "".join(["<button class='btn btn-default btn-monster'><input type='hidden' value=", str(MonsterId[x]), "><img src=", img_source, "img/MonsterIcon/", str(MonsterId[x]), ".png width='47'></button>"])
+        MonsterIcon_source[x] = "".join(["<button class='btn btn-default btn-monster' value=", str(MonsterId[x]), "><img src=", img_source, "img/MonsterIcon/", str(MonsterId[x]), ".png width='47'></button>"])
 
     if MonsterId:
         return jsonify(Monster=MonsterIcon_source)
@@ -154,7 +154,7 @@ def monSearch2():
 
     MonsterIcon_source = [None] * len(MonsterId)
     for x in range(len(MonsterId)):
-        MonsterIcon_source[x] = "".join(["<button class='btn btn-default btn-monster'><input type='hidden' value=", str(MonsterId[x]), "><img src=", img_source, "img/MonsterIcon/", str(MonsterId[x]), ".png width='47'></button>"])
+        MonsterIcon_source[x] = "".join(["<button class='btn btn-default btn-monster' value='", str(MonsterId[x]), "'><img src=", img_source, "img/MonsterIcon/", str(MonsterId[x]), ".png width='47'></button>"])
 
     if MonsterId:
         return jsonify(Monster=MonsterIcon_source)
@@ -176,6 +176,7 @@ def monData():
 
     ActiveSkillId = df_monster[df_monster.MonsterId==MonsterId].ActiveSkillId.tolist()[0]
     ActiveSkill = df_activeskill[df_activeskill.ActiveSkillId==ActiveSkillId].to_dict('records')[0]
+    MonsterIdSameAS = df_monster.query('ActiveSkillId!=21 & ActiveSkillId==@ActiveSkillId & MonsterId!=@MonsterId').MonsterId.tolist()
 
     LeaderSkillId = df_monster[df_monster.MonsterId==MonsterId].LeaderSkillId.tolist()[0]
     LeaderSkill = df_leaderskill[df_leaderskill.LeaderSkillId==LeaderSkillId].to_dict('records')[0]
@@ -189,6 +190,7 @@ def monData():
             AwokenSkillIds = AwokenSkillIds,
             SuperAwokenSkillIds = SuperAwokenSkillIds,
             ActiveSkill = ActiveSkill,
+            MonsterIdSameAS = MonsterIdSameAS,
             LeaderSkill = LeaderSkill
             )
 

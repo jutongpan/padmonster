@@ -240,6 +240,16 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/bootstrap-select.min.js"></script>
   <script src="{{ url_for('static', filename='js/form.js') }}"></script>
+  <script type="text/javascript">
+    $('button[name=AwokenSkillSelector]').click(function() {
+      var ASID = $(this).val();
+      $('div#selected_awokenskills').append(
+        '<button type="button" class="btn btn-default" value="' + ASID + '" style="padding: 0px; margin-right: 1px;">' +
+          "<img src='{{ img_source }}img/AwokenSkill/" + ASID + ".png' width='25'>" +
+        '</button>'
+      );
+    });
+  </script>
 
 </body>
 </html>

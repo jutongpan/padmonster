@@ -2,7 +2,7 @@ function populateDataViewer(el){
 
 	$.ajax({
 		data: JSON.stringify({
-			ID : $(el).find('input[type="hidden"]').val()
+			ID : $(el).val()
 		}),
 		contentType: 'application/json;charset=UTF-8',
 		type: 'POST',
@@ -23,15 +23,6 @@ function populateDataViewer(el){
 
 
 $(document).ready(function() {
-
-    $('button[name=AwokenSkillSelector]').click(function() {
-      var ASID = $(this).val();
-      $('div#selected_awokenskills').append(
-        '<button type="button" class="btn btn-default" value="' + ASID + '" style="padding: 0px; margin-right: 1px;">' +
-          "<img src='{{ img_source }}img/AwokenSkill/" + ASID + ".png' width='25'>" +
-        '</button>'
-      );
-    });
 
     $('div#selected_awokenskills').on('click', 'button', function() {
       $(this).remove();
@@ -135,13 +126,17 @@ $(document).ready(function() {
 	});
 
 
-	$('#results').on('click', 'button', function(event) {
+	$('#results').on('click', '.btn-monster', function(event) {
 		
 		populateDataViewer($(this));
 
 		$('#monDataViewer')[0].scrollIntoView();
 
-		event.preventDefault();
+	});
+
+	$('#monDataViewer').on('click', '.btn-monster', function(event) {
+
+		populateDataViewer($(this));
 
 	});
 
