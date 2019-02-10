@@ -1,7 +1,6 @@
 ## To do:
 ## Rarity
 ## Evolution
-## Fix AwokenSkillSelector layout on PC
 ## Fully collapsible Awoken Skill panel, same as Active Skill
 ## wu in Awoken Skill in monDataViewer
 ## Active Skill and Awoken Skill panel remade as Modal 
