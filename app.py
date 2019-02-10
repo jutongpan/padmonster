@@ -30,7 +30,23 @@ df_activeskill = pd.read_sql_query("select * from ActiveSkill;", conn)
 df_activeskill['ActiveSkillDescription'] = df_activeskill['ActiveSkillDescription'].str.replace('<img src="img', ''.join(['<img src="', img_source, 'img']))
 
 df_activeskilltype = pd.read_sql_query("select * from ActiveSkillType;", conn)
-ActiveSkillTypes_All = df_activeskilltype.ActiveSkillType.dropna().unique()
+df_activeskilltype.loc[df_activeskilltype.ActiveSkillType=="傷害吸收無效化", 'ActiveSkillType'] = "大傷吸收無效"
+df_activeskilltype.loc[df_activeskilltype.ActiveSkillType=="全場攻擊", 'ActiveSkillType'] = "全體攻擊"
+df_activeskilltype.loc[df_activeskilltype.ActiveSkillType=="增加移動時間", 'ActiveSkillType'] = "轉珠時間增加"
+df_activeskilltype.loc[df_activeskilltype.ActiveSkillType=="減少移動時間", 'ActiveSkillType'] = "轉珠時間減少"
+df_activeskilltype.loc[df_activeskilltype.ActiveSkillType.str.contains("大炮（全體", na=False), 'ActiveSkillType'] = "大炮（全體）"
+df_activeskilltype.loc[df_activeskilltype.ActiveSkillType.str.contains("大炮（單體", na=False), 'ActiveSkillType'] = "大炮（單體）"
+df_activeskilltype.loc[df_activeskilltype.ActiveSkillType=="天降的寶珠不會產生COMBO", 'ActiveSkillType'] = "無天降"
+df_activeskilltype.loc[df_activeskilltype.ActiveSkillType=="屬性傷害吸收無效化", 'ActiveSkillType'] = "屬性傷害吸收無效"
+df_activeskilltype.loc[df_activeskilltype.ActiveSkillType=="解除鎖定", 'ActiveSkillType'] = "寶珠解鎖"
+df_activeskilltype.loc[df_activeskilltype.ActiveSkillType=="防禦力下降", 'ActiveSkillType'] = "敵人防禦下降"
+df_activeskilltype.loc[df_activeskilltype.ActiveSkillType=="傷害增幅（類型）", 'ActiveSkillType'] = "增傷（Type）"
+df_activeskilltype.loc[df_activeskilltype.ActiveSkillType=="傷害增幅（屬性）", 'ActiveSkillType'] = "增傷（屬性）"
+df_activeskilltype.loc[df_activeskilltype.ActiveSkillType=="傷害增幅（全隊）", 'ActiveSkillType'] = "增傷（按覺醒數量）"
+df_activeskilltype.loc[df_activeskilltype.ActiveSkillType=="轉換敵方屬性", 'ActiveSkillType'] = "敵人屬性轉換"
+df_activeskilltype.loc[df_activeskilltype.ActiveSkillType=="自身屬性變換", 'ActiveSkillType'] = "自身屬性轉換"
+df_activeskilltype.loc[df_activeskilltype.ActiveSkillType=="提升寶珠掉率", 'ActiveSkillType'] = "寶珠掉率提升"
+ActiveSkillTypes_All = sorted(df_activeskilltype.ActiveSkillType.dropna().unique())
 
 df_leaderskill = pd.read_sql_query("select * from LeaderSkill;", conn)
 df_leaderskill['LeaderSkillDescription'] = df_leaderskill['LeaderSkillDescription'].str.replace('<img src="images/.+?>', '')
