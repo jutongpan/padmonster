@@ -46,6 +46,8 @@ df_activeskilltype.loc[df_activeskilltype.ActiveSkillType=="傷害增幅（全�
 df_activeskilltype.loc[df_activeskilltype.ActiveSkillType=="轉換敵方屬性", 'ActiveSkillType'] = "敵人屬性轉換"
 df_activeskilltype.loc[df_activeskilltype.ActiveSkillType=="自身屬性變換", 'ActiveSkillType'] = "自身屬性轉換"
 df_activeskilltype.loc[df_activeskilltype.ActiveSkillType=="提升寶珠掉率", 'ActiveSkillType'] = "寶珠掉率提升"
+df_activeskilltype.drop(df_activeskilltype[df_activeskilltype.ActiveSkillType=="隨機效果"].index, inplace=True)
+df_activeskilltype.drop(df_activeskilltype[df_activeskilltype.ActiveSkillType=="路徑顯示"].index, inplace=True)
 ActiveSkillTypes_All = sorted(df_activeskilltype.ActiveSkillType.dropna().unique())
 
 df_leaderskill = pd.read_sql_query("select * from LeaderSkill;", conn)

@@ -16,9 +16,6 @@
     .btn-monster.btn {
       padding: 0px;
     }
-    .toggle-on {
-      background-color: #5cb85c;
-    }
     .checkbtn {
       padding: 4px;
     }
@@ -33,7 +30,7 @@
 
     <div class="well well-sm">
 
-      <div >
+      <div>
         <ul class="nav nav-tabs">
           <li class="active"><a href="#SearchByFilter" data-toggle="tab" aria-expanded="true">Search by Filter</a></li>
           <li class=""><a href="#SearchById" data-toggle="tab" aria-expanded="false">Search by ID</a></li>
@@ -97,7 +94,7 @@
                 {% for TypeId in TypeIds %}
                   <label class="btn btn-default checkbtn">
                     <input type="checkbox" value="{{ TypeId }}">
-                    <img src='{{ img_source }}img/Type/{{ TypeId }}.png' width='20'>
+                    <img src='{{ img_source }}img/Type/{{ TypeId }}.png' width='21'>
                   </label>
                 {% endfor %}
               </div>
@@ -138,7 +135,7 @@
                 <div class="btn-toolbar" role="toolbar" aria-label="..." style="padding-top: 5px;">
                   {% for AwokenSkillId in AwokenSkillIds %}
                     <button type="button" name="AwokenSkillSelector" class="btn btn-default" value="{{ AwokenSkillId }}" style="padding: 5px;">
-                      <img src='{{ img_source }}img/AwokenSkill/{{ AwokenSkillId }}.png' width='21'>
+                      <img src='{{ img_source }}img/AwokenSkill/{{ AwokenSkillId }}.png' width='22'>
                     </button>
                   {% endfor %}
                 </div>
