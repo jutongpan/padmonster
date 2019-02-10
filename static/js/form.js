@@ -24,6 +24,39 @@ function populateDataViewer(el){
 
 $(document).ready(function() {
 
+    $('button[name=AwokenSkillSelector]').click(function() {
+      var ASID = $(this).val();
+      $('div#selected_awokenskills').append(
+        '<button type="button" class="btn btn-default" value="' + ASID + '" style="padding: 0px; margin-right: 1px;">' +
+          "<img src='{{ img_source }}img/AwokenSkill/" + ASID + ".png' width='25'>" +
+        '</button>'
+      );
+    });
+
+    $('div#selected_awokenskills').on('click', 'button', function() {
+      $(this).remove();
+    });
+
+    $('button#ClearAwokenSkill').click(function() {
+      $('div#selected_awokenskills').empty();
+    });
+
+    $('select#IncSuper').selectpicker('setStyle', 'btn-default btn-sm');
+
+
+    $('#EnableRange').change(function() {
+      if (this.checked) {
+        $('#ToId').prop('disabled', false);
+        $('#FromId').attr('placeholder', 'From');
+        $('#ToId').attr('placeholder', 'To');
+      } else {
+        $('#ToId').prop('disabled', true);
+        $('#FromId').attr('placeholder', 'ID');
+        $('#ToId').attr('placeholder', '');
+      };
+    });
+
+
 	$('#filter').on('submit', function(event) {
 
 		var selectedAwokenSkillIds = $('div#selected_awokenskills > button').map(function() {
