@@ -29,7 +29,8 @@ TypeIds_All = pd.read_sql_query("select TypeId from Type;", conn).TypeId.tolist(
 df_activeskill = pd.read_sql_query("select * from ActiveSkill;", conn)
 df_activeskill['ActiveSkillDescription'] = df_activeskill['ActiveSkillDescription'].str.replace('<img src="img', ''.join(['<img src="', img_source, 'img']))
 
-ActiveSkillTypes_All = pd.read_sql_query("select ActiveSkillType from ActiveSkillType;", conn).ActiveSkillType.dropna().unique()
+df_activeskilltype = pd.read_sql_query("select * from ActiveSkillType;", conn)
+ActiveSkillTypes_All = df_activeskilltype.ActiveSkillType.dropna().unique()
 
 df_leaderskill = pd.read_sql_query("select * from LeaderSkill;", conn)
 df_leaderskill['LeaderSkillDescription'] = df_leaderskill['LeaderSkillDescription'].str.replace('<img src="images/.+?>', '')
@@ -57,6 +58,7 @@ def monSearch1():
     Type      = request.json['Type']
     Awoken    = request.json['Awoken']
     IncSuper  = request.json['IncSuper']
+    Active    = request.json['Active']
     SortBy    = request.json['SortBy']
     TopN      = request.json['TopN']
 
@@ -91,6 +93,11 @@ def monSearch1():
             MonsterIdByAllAwoken = set.intersection(*map(set, MonsterIdByAllAwoken_listoflists))
             MonsterIdByAwokenIncOneSup = list(set.difference(MonsterIdByAllAwoken, MonsterIdDiffIntersec))
             dff = dff[dff.MonsterId.isin(MonsterIdByAwokenIncOneSup)]
+
+    if Active:
+        ActiveSkillId_listoflists = [df_activeskilltype[df_activeskilltype.ActiveSkillType == i].ActiveSkillId.tolist() for i in Active]
+        ActiveSkillIdByTypes = list(set.intersection(*map(set, ActiveSkillId_listoflists)))
+        dff = dff[dff.ActiveSkillId.isin(ActiveSkillIdByTypes)]
 
     if TopN!="All":
         dff = dff.nlargest(n = int(re.search('[0-9]+', TopN)[0]), columns = SortBy)

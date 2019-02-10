@@ -34,6 +34,10 @@ $(document).ready(function() {
 			return $(this).val();
 		}).get();
 
+		var selectedActiveSkillTypes = $('div#ActiveSkill').find('input[type=checkbox]:checked').map(function() {
+			return $(this).val();
+		}).get();
+
 		$.ajax({
 			data: JSON.stringify({
 				MainAtt    : $('input[name=selectMainAtt]:checked').val(),
@@ -41,6 +45,7 @@ $(document).ready(function() {
 				Type       : selectedTypes,
 				Awoken     : selectedAwokenSkillIds,
 				IncSuper   : $('#IncSuper').val(),
+				Active     : selectedActiveSkillTypes,
 				SortBy     : $('select#SortBy').val(),
 				TopN       : $('select#TopN').val()
 			}),
