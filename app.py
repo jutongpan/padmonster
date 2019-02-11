@@ -1,5 +1,4 @@
 ## To do:
-## Rarity
 ## Evolution
 ## Fully collapsible Awoken Skill panel, same as Active Skill
 ## wu in Awoken Skill in monDataViewer

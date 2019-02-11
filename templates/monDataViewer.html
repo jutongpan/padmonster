@@ -1,109 +1,118 @@
 <div class='well well-sm'>
-    <div style='display:flex; flex-wrap:wrap;'>
-        <img src='{{ img_source }}img/MonsterIcon/{{ Monster.MonsterId }}.png' height='60' width='60'>
-        <div style='align-self: center; padding-left: 5px; padding-top: 5px;'>
-            <div>
+    <table class='table table-bordered table-condensed' style="background: none; margin-bottom: 5px;">
+        <tr>
+            <td rowspan="2" style="width: 65px;">
+                <img src='{{ img_source }}img/MonsterIcon/{{ Monster.MonsterId }}.png' height='60' width='60'>
+            </td>
+            <td>
                 <b style='font-size:15px;'>No.{{ Monster.MonsterId }} - {{ Monster.CnName }}</b>
-            </div>
-            <div>
+            </td>
+        </tr>
+        <tr>
+            <td>
                 {% for TypeId in TypeIds %}
                     <img src='{{ img_source }}img/Type/{{ TypeId }}.png' height='23' width='23'>
                 {% endfor %}
-            </div>
-        </div>
-    </div>
-    <div style='padding-top: 10px; padding-bottom: 5px;'>
-        <b>覺醒技:</b>
-        {% for AwokenSkillId in AwokenSkillIds %}
-            <img src='{{ img_source }}img/AwokenSkill/{{ AwokenSkillId }}.png' width='20'>
-        {% endfor %}
-    </div>
-    <div style="padding-bottom: 10px;">
-        <b>超覺醒:</b>
-        {% for SuperAwokenSkillId in SuperAwokenSkillIds %}
-            <img src='{{ img_source }}img/AwokenSkill/{{ SuperAwokenSkillId }}.png' width='20'>
-        {% endfor %}
-    </div>
-    <div>
-        <table class='table table-bordered table-condensed text-center'>
-            <thead>
-                <tr>
-                    <th class="text-center">Lv</th>
-                    <th class="text-center">HP</th>
-                    <th class="text-center">ATK</th>
-                    <th class="text-center">RCV</th>
-                    <th class="text-center">Weighted</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{ Monster.LvMax }}</td>
-                    <td>{{ Monster.Hp }} </td>
-                    <td>{{ Monster.Atk }}</td>
-                    <td>{{ Monster.Rcv }}</td>
-                    <td>{{ '{:.0f}'.format(Monster.Weighted) }}</td>
-                </tr>
-                <tr>
-                    <td>110</td>
-                    {% for item in [Monster.Hp110, Monster.Atk110, Monster.Rcv110, Monster.Weighted110] %}
-                        {% if item==item %}
-                            <td>{{ '{:.0f}'.format(item) }}</td>
-                        {% else %}
-                            <td style="color: #7A8288">NA</td>
-                        {% endif %}
-                    {% endfor %}
-                </tr>
-            </tbody>
+                <span style="display: inline-block; width: 5px;"></span>
+                {{ Monster.Rarity }}星
+            </td>
+        </tr>
+        <tr>
+            <th style="text-align: right; padding-top: 6px;">覺醒技:</th>
+            <td>
+                {% for AwokenSkillId in AwokenSkillIds %}
+                    <img src='{{ img_source }}img/AwokenSkill/{{ AwokenSkillId }}.png' width='20'>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <th style="text-align: right; padding-top: 6px;">超覺醒:</th>
+            <td>
+                {% for SuperAwokenSkillId in SuperAwokenSkillIds %}
+                    <img src='{{ img_source }}img/AwokenSkill/{{ SuperAwokenSkillId }}.png' width='20'>
+                {% endfor %}
+            </td>
+        </tr>
+    </table>
 
-        </table>
 
-        <table class='table table-bordered table-condensed'>
-            <tbody>
-                <tr>
-                    <th style="color:orange;">主動技能</th>
-                    <td>{{ ActiveSkill.ActiveSkillName }}</td>
-                    <th>CD</th>
-                    {% if ActiveSkill.MaxCd==ActiveSkill.MaxCd %}
-                        <td>{{ '{:.0f}'.format(ActiveSkill.MaxCd) }} → {{ '{:.0f}'.format(ActiveSkill.MinCd) }}</td>
+    <table class='table table-bordered table-condensed text-center' style="margin-bottom: 5px;">
+        <thead>
+            <tr>
+                <th class="text-center">Lv</th>
+                <th class="text-center">HP</th>
+                <th class="text-center">ATK</th>
+                <th class="text-center">RCV</th>
+                <th class="text-center">Weighted</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ Monster.LvMax }}</td>
+                <td>{{ Monster.Hp }} </td>
+                <td>{{ Monster.Atk }}</td>
+                <td>{{ Monster.Rcv }}</td>
+                <td>{{ '{:.0f}'.format(Monster.Weighted) }}</td>
+            </tr>
+            <tr>
+                <td>110</td>
+                {% for item in [Monster.Hp110, Monster.Atk110, Monster.Rcv110, Monster.Weighted110] %}
+                    {% if item==item %}
+                        <td>{{ '{:.0f}'.format(item) }}</td>
                     {% else %}
                         <td style="color: #7A8288">NA</td>
                     {% endif %}
-                </tr>
-                <tr>
-                    <td style="text-align: left; font-size: 13px;" colspan="4">
-                        {{ ActiveSkill.ActiveSkillDescription|safe }}
-                    </td>
-                </tr>
-                {% if MonsterIdSameAS %}
-                <tr>
-                    <th>同技能寵</th>
-                    <td colspan="3">
-                        {% for Id in MonsterIdSameAS %}
-                            <button class='btn btn-default btn-monster' value="{{ Id }}">
-                            <img src='{{ img_source }}img/MonsterIcon/{{ Id }}.png' height='35' width='35'>
-                            </button>
-                        {% endfor %}
-                    </td>
-                </tr>
+                {% endfor %}
+            </tr>
+        </tbody>
+
+    </table>
+
+    <table class='table table-bordered table-condensed' style="margin-bottom: 5px;">
+        <tbody>
+            <tr>
+                <th style="color:orange;">主動技能</th>
+                <td>{{ ActiveSkill.ActiveSkillName }}</td>
+                <th>CD</th>
+                {% if ActiveSkill.MaxCd==ActiveSkill.MaxCd %}
+                    <td>{{ '{:.0f}'.format(ActiveSkill.MaxCd) }} → {{ '{:.0f}'.format(ActiveSkill.MinCd) }}</td>
+                {% else %}
+                    <td style="color: #7A8288">NA</td>
                 {% endif %}
-                <tr>
-                    <th style="color:orange;">隊長技能</th>
-                    <td colspan="3">{{ LeaderSkill.LeaderSkillName }}</td>
-                </tr>
-                <tr>
-                    <td style="text-align: left; font-size: 13px;" colspan="4">
-                        {{ LeaderSkill.LeaderSkillDescription|safe }}
-                    </td>
-                </tr>
-                <tr>
-                    <th>外部鏈接</th>
-                    <td style="text-align: left; padding-left: 10px;" colspan="3">
-                        <a href="http://pad.skyozora.com/pets/{{ Monster.MonsterId }}" target="_blank">戰友網</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        
-    </div>
+            </tr>
+            <tr>
+                <td style="text-align: left; font-size: 13px;" colspan="4">
+                    {{ ActiveSkill.ActiveSkillDescription|safe }}
+                </td>
+            </tr>
+            {% if MonsterIdSameAS %}
+            <tr>
+                <th>同技能寵</th>
+                <td colspan="3">
+                    {% for Id in MonsterIdSameAS %}
+                        <button class='btn btn-default btn-monster' value="{{ Id }}">
+                        <img src='{{ img_source }}img/MonsterIcon/{{ Id }}.png' height='35' width='35'>
+                        </button>
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endif %}
+            <tr>
+                <th style="color:orange;">隊長技能</th>
+                <td colspan="3">{{ LeaderSkill.LeaderSkillName }}</td>
+            </tr>
+            <tr>
+                <td style="text-align: left; font-size: 13px;" colspan="4">
+                    {{ LeaderSkill.LeaderSkillDescription|safe }}
+                </td>
+            </tr>
+            <tr>
+                <th>外部鏈接</th>
+                <td style="text-align: left;" colspan="3">
+                    <a href="http://pad.skyozora.com/pets/{{ Monster.MonsterId }}" target="_blank">戰友網</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
 </div>
