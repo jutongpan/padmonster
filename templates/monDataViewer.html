@@ -19,19 +19,27 @@
         </tr>
         <tr>
             <th style="text-align: right; padding-top: 6px;">覺醒技:</th>
+            {% if AwokenSkillIds %}
             <td>
                 {% for AwokenSkillId in AwokenSkillIds %}
                     <img src='{{ img_source }}img/AwokenSkill/{{ AwokenSkillId }}.png' width='20'>
                 {% endfor %}
             </td>
+            {% else %}
+            <td style="color: #7A8288">無</td>
+            {% endif %}
         </tr>
         <tr>
             <th style="text-align: right; padding-top: 6px;">超覺醒:</th>
+            {% if SuperAwokenSkillIds %}
             <td>
                 {% for SuperAwokenSkillId in SuperAwokenSkillIds %}
                     <img src='{{ img_source }}img/AwokenSkill/{{ SuperAwokenSkillId }}.png' width='20'>
                 {% endfor %}
             </td>
+            {% else %}
+            <td style="color: #7A8288">無</td>
+            {% endif %}
         </tr>
     </table>
 
