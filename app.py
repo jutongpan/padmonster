@@ -59,6 +59,8 @@ ActiveSkillTypes_All = sorted(df_activeskilltype.ActiveSkillType.dropna().unique
 df_leaderskill = pd.read_sql_query("select * from LeaderSkill;", conn)
 df_leaderskill['LeaderSkillDescription'] = df_leaderskill['LeaderSkillDescription'].str.replace('<img src="images/.+?>', '')
 
+df_evo = pd.read_sql_query("select * from Evolution;", conn)
+
 conn.close()
 
 
@@ -186,6 +188,8 @@ def monData():
 
     LeaderSkillId = df_monster[df_monster.MonsterId==MonsterId].LeaderSkillId.tolist()[0]
     LeaderSkill = df_leaderskill[df_leaderskill.LeaderSkillId==LeaderSkillId].to_dict('records')[0]
+    EvoGroup = df_evo.query('MonsterId == @MonsterId').EvoGroup.tolist()
+    MonsterIdSameEvo = df_evo.query('EvoGroup == @EvoGroup & MonsterId != @MonsterId').MonsterId.tolist()
 
     if MonsterId:
         return render_template(
@@ -197,7 +201,8 @@ def monData():
             SuperAwokenSkillIds = SuperAwokenSkillIds,
             ActiveSkill = ActiveSkill,
             MonsterIdSameAS = MonsterIdSameAS,
-            LeaderSkill = LeaderSkill
+            LeaderSkill = LeaderSkill,
+            MonsterIdSameEvo = MonsterIdSameEvo
             )
 
     return jsonify(error='No match!')

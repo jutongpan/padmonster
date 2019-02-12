@@ -106,6 +106,18 @@
                     {{ LeaderSkill.LeaderSkillDescription|safe }}
                 </td>
             </tr>
+            {% if MonsterIdSameEvo %}
+            <tr>
+                <th MonsterId == @MonsterId>進化形態</th>
+                <td colspan="3">
+                    {% for Id in MonsterIdSameEvo %}
+                        <button class='btn btn-default btn-monster' value="{{ Id }}">
+                        <img src='{{ img_source }}img/MonsterIcon/{{ Id }}.png' height='35' width='35'>
+                        </button>
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endif %}
             <tr>
                 <th>外部鏈接</th>
                 <td style="text-align: left;" colspan="3">
