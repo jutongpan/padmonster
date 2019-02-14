@@ -1,7 +1,3 @@
-## To do:
-## Fully collapsible Awoken Skill panel, same as Active Skill
-## Active Skill and Awoken Skill panel remade as Modal 
-
 from flask import Flask, render_template, render_template_string, request, jsonify
 import sqlite3
 import pandas as pd
