@@ -1,4 +1,4 @@
-from flask import Flask, render_template, render_template_string, request, jsonify
+from flask import Flask, render_template, request, jsonify
 import sqlite3
 import pandas as pd
 import re
@@ -32,6 +32,8 @@ TypeIds_All = pd.read_sql_query("select TypeId from Type;", conn).TypeId.tolist(
 
 df_activeskill = pd.read_sql_query("select * from ActiveSkill;", conn)
 df_activeskill['ActiveSkillDescription'] = df_activeskill['ActiveSkillDescription'].str.replace('<img src="img', ''.join(['<img src="', img_source, 'img']))
+
+df_monster = pd.merge(df_monster, df_activeskill[["ActiveSkillId", "MaxCd", "MinCd"]], on = "ActiveSkillId")
 
 df_activeskilltype = pd.read_sql_query("select * from ActiveSkillType;", conn)
 df_activeskilltype.loc[df_activeskilltype.ActiveSkillType=="傷害吸收無效化", 'ActiveSkillType'] = "大傷吸收無效"
