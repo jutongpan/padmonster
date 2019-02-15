@@ -16,6 +16,10 @@ Attributes_All = pd.read_sql_query("select AttributeName from Attribute;", conn)
 df_monster = pd.read_sql_query("select * from Monster;", conn)
 df_monster['Weighted'] = df_monster['Hp']/10 + df_monster['Atk']/5 + df_monster['Rcv']/3
 df_monster['Weighted110'] = df_monster['Hp110']/10 + df_monster['Atk110']/5 + df_monster['Rcv110']/3
+df_monster['HpAll'] = df_monster[['Hp', 'Hp110']].max(axis=1)
+df_monster['AtkAll'] = df_monster[['Atk', 'Atk110']].max(axis=1)
+df_monster['RcvAll'] = df_monster[['Rcv', 'Rcv110']].max(axis=1)
+df_monster['WeightedAll'] = df_monster[['Weighted', 'Weighted110']].max(axis=1)
 
 df_awoken = pd.read_sql_query("select * from AwokenSkillRelation;", conn)
 AwokenSkillIds_All = df_awoken.AwokenSkillId.unique()
@@ -119,7 +123,9 @@ def monSearch1():
         ActiveSkillIdByTypes = list(set.intersection(*map(set, ActiveSkillId_listoflists)))
         dff = dff[dff.ActiveSkillId.isin(ActiveSkillIdByTypes)]
 
-    if TopN!="All":
+    if "Bottom" in TopN:
+        dff = dff.nsmallest(n = int(re.search('[0-9]+', TopN)[0]), columns = SortBy)
+    elif "Top" in TopN:
         dff = dff.nlargest(n = int(re.search('[0-9]+', TopN)[0]), columns = SortBy)
 
     MonsterId = dff.MonsterId.tolist()
