@@ -96,6 +96,19 @@ $(document).ready(function() {
 	});
 
 
+	$('#filter').on('reset', function(event) {
+
+		$('button.active').removeClass('active');
+
+		$('input[name=selectMainAtt][value=Any]').parent('button').addClass('active');
+
+		$('input[name=selectSubAtt][value=Any]').parent('button').addClass('active');
+
+		$('div#selected_awokenskills').empty();
+
+	});
+
+
 	$('#FormId').on('submit', function(event) {
 
 		$.ajax({
