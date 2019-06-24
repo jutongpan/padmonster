@@ -79,14 +79,15 @@ def index():
 @app.route('/monSearch1', methods=['POST'])
 def monSearch1():
 
-    MainAtt   = request.json['MainAtt']
-    SubAtt    = request.json['SubAtt']
-    Type      = request.json['Type']
-    Awoken    = request.json['Awoken']
-    IncSuper  = request.json['IncSuper']
-    Active    = request.json['Active']
-    SortBy    = request.json['SortBy']
-    TopN      = request.json['TopN']
+    MainAtt      = request.json['MainAtt']
+    SubAtt       = request.json['SubAtt']
+    Type         = request.json['Type']
+    Awoken       = request.json['Awoken']
+    IncSuper     = request.json['IncSuper']
+    Active       = request.json['Active']
+    isAssistable = request.json['Assistable']
+    SortBy       = request.json['SortBy']
+    TopN         = request.json['TopN']
 
     if MainAtt=="Any":
         dff = df_monster
@@ -125,10 +126,19 @@ def monSearch1():
         ActiveSkillIdByTypes = list(set.intersection(*map(set, ActiveSkillId_listoflists)))
         dff = dff[dff.ActiveSkillId.isin(ActiveSkillIdByTypes)]
 
-    if "Bottom" in TopN:
-        dff = dff.nsmallest(n = int(re.search('[0-9]+', TopN)[0]), columns = SortBy)
-    elif "Top" in TopN:
-        dff = dff.nlargest(n = int(re.search('[0-9]+', TopN)[0]), columns = SortBy)
+    if isAssistable:
+        dff = dff[dff.Assistable == True]
+
+    if SortBy in ['MaxCd', 'MinCd']:
+        if "Bottom" in TopN:
+            dff = dff.nlargest(n = int(re.search('[0-9]+', TopN)[0]), columns = SortBy)
+        elif "Top" in TopN:
+            dff = dff.nsmallest(n = int(re.search('[0-9]+', TopN)[0]), columns = SortBy)
+    else:
+        if "Bottom" in TopN:
+            dff = dff.nsmallest(n = int(re.search('[0-9]+', TopN)[0]), columns = SortBy)
+        elif "Top" in TopN:
+            dff = dff.nlargest(n = int(re.search('[0-9]+', TopN)[0]), columns = SortBy)
 
     MonsterId = dff.MonsterId.tolist()
 

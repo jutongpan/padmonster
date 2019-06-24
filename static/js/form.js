@@ -70,6 +70,7 @@ $(document).ready(function() {
 				Awoken     : selectedAwokenSkillIds,
 				IncSuper   : $('#IncSuper').val(),
 				Active     : selectedActiveSkillTypes,
+				Assistable : $('#checkAssistable').prop("checked"),
 				SortBy     : $('select#SortBy').val(),
 				TopN       : $('select#TopN').val()
 			}),
