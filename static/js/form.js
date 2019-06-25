@@ -107,6 +107,11 @@ $(document).ready(function() {
 
 		$('div#selected_awokenskills').empty();
 
+		var _this = this;
+		setTimeout(function() {
+			$('.selectpicker', _this).selectpicker('refresh');
+		})
+
 	});
 
 
