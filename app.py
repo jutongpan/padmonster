@@ -35,6 +35,10 @@ df_activeskill['ActiveSkillDescription'] = df_activeskill['ActiveSkillDescriptio
 
 df_monster = pd.merge(df_monster, df_activeskill[["ActiveSkillId", "MaxCd", "MinCd"]], on = "ActiveSkillId")
 
+## For monsters of evolution-type or powerup-type, they cannot skill up, so MinCd should be equal to MaxCd
+MonsterId_EvoOrPower = df_type[df_type.TypeId.isin([9,10])].MonsterId.tolist()
+df_monster.loc[df_monster.MonsterId.isin(MonsterId_EvoOrPower), 'MinCd'] = df_monster.loc[df_monster.MonsterId.isin(MonsterId_EvoOrPower), 'MaxCd']
+
 df_activeskilltype = pd.read_sql_query("select * from ActiveSkillType;", conn)
 df_activeskilltype.loc[df_activeskilltype.ActiveSkillType=="傷害吸收無效化", 'ActiveSkillType'] = "大傷吸收無效"
 df_activeskilltype.loc[df_activeskilltype.ActiveSkillType=="全場攻擊", 'ActiveSkillType'] = "全體攻擊"
