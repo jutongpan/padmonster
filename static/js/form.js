@@ -1,3 +1,5 @@
+var baseurl = '/padmonster/';
+
 function populateDataViewer(el){
 
 	$.ajax({
@@ -6,7 +8,7 @@ function populateDataViewer(el){
 		}),
 		contentType: 'application/json;charset=UTF-8',
 		type: 'POST',
-		url: '/monData',
+		url: baseurl + 'monData',
 	})
 	.done(function(output) {
 
@@ -76,7 +78,7 @@ $(document).ready(function() {
 			}),
 			contentType: 'application/json;charset=UTF-8',
 			type: 'POST',
-			url: '/monSearch1',
+			url: baseurl + 'monSearch1',
 		})
 		.done(function(output) {
 
@@ -124,7 +126,7 @@ $(document).ready(function() {
 			}),
 			contentType: 'application/json;charset=UTF-8',
 			type: 'POST',
-			url: '/monSearch2',
+			url: baseurl + 'monSearch2',
 		})
 		.done(function(output) {
 
@@ -146,7 +148,7 @@ $(document).ready(function() {
 
 
 	$('#results').on('click', '.btn-monster', function(event) {
-		
+
 		populateDataViewer($(this));
 
 		$('#monDataViewer')[0].scrollIntoView();
