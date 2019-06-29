@@ -1,4 +1,4 @@
-var baseurl = '/padmonster/';
+var baseurl = window.location.pathname;
 
 function populateDataViewer(el){
 
@@ -8,7 +8,7 @@ function populateDataViewer(el){
 		}),
 		contentType: 'application/json;charset=UTF-8',
 		type: 'POST',
-		url: baseurl + 'monData',
+		url: baseurl + '/monData',
 	})
 	.done(function(output) {
 
@@ -78,7 +78,7 @@ $(document).ready(function() {
 			}),
 			contentType: 'application/json;charset=UTF-8',
 			type: 'POST',
-			url: baseurl + 'monSearch1',
+			url: baseurl + '/monSearch1',
 		})
 		.done(function(output) {
 
@@ -126,7 +126,7 @@ $(document).ready(function() {
 			}),
 			contentType: 'application/json;charset=UTF-8',
 			type: 'POST',
-			url: baseurl + 'monSearch2',
+			url: baseurl + '/monSearch2',
 		})
 		.done(function(output) {
 
