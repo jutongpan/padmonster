@@ -275,7 +275,9 @@
     });
 
     {% if singleMonsterId %}
-      populateDataViewer('{{ singleMonsterId }}')
+      populateDataViewer('{{ singleMonsterId }}');
+      $('#FromId').val('{{ singleMonsterId }}');
+      $('[href="#SearchById"]').tab('show');
     {% endif %}
   </script>
 
