@@ -94,7 +94,8 @@ def index():
         Attributes = Attributes_All,
         TypeIds = TypeIds_All,
         AwokenSkillIds = AwokenSkillIds_All,
-        ActiveSkillTypes = ActiveSkillTypes_All
+        ActiveSkillTypes = ActiveSkillTypes_All,
+        singleMonsterId = request.args.get('singleMonsterId')
         )
 
 

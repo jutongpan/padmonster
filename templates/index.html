@@ -273,6 +273,10 @@
         '</button>'
       );
     });
+
+    {% if singleMonsterId %}
+      populateDataViewer('{{ singleMonsterId }}')
+    {% endif %}
   </script>
 
 </body>

@@ -1,10 +1,10 @@
 var baseurl = window.location.pathname;
 
-function populateDataViewer(el){
+function populateDataViewer(monId){
 
 	$.ajax({
 		data: JSON.stringify({
-			ID : $(el).val()
+			ID : monId
 		}),
 		contentType: 'application/json;charset=UTF-8',
 		type: 'POST',
@@ -87,7 +87,7 @@ $(document).ready(function() {
 			}
 			else {
 				$('#results').html(output.Monster);
-				populateDataViewer($('#results > button')[0]);
+				populateDataViewer($('#results > button')[0].val());
 			};
 
 			$('#results')[0].scrollIntoView();
@@ -135,7 +135,7 @@ $(document).ready(function() {
 			}
 			else {
 				$('#results').html(output.Monster);
-				populateDataViewer($('#results > button')[0]);
+				populateDataViewer($('#results > button')[0].val());
 			};
 
 			$('#results')[0].scrollIntoView();
@@ -149,7 +149,7 @@ $(document).ready(function() {
 
 	$('#results').on('click', '.btn-monster', function(event) {
 
-		populateDataViewer($(this));
+		populateDataViewer($(this).val());
 
 		$('#monDataViewer')[0].scrollIntoView();
 
@@ -157,7 +157,7 @@ $(document).ready(function() {
 
 	$('#monDataViewer').on('click', '.btn-monster', function(event) {
 
-		populateDataViewer($(this));
+		populateDataViewer($(this).val());
 
 	});
 
