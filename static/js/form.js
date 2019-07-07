@@ -87,7 +87,7 @@ $(document).ready(function() {
 			}
 			else {
 				$('#results').html(output.Monster);
-				populateDataViewer($('#results > button')[0].val());
+				populateDataViewer($('#results > button')[0].value);
 			};
 
 			$('#results')[0].scrollIntoView();
@@ -135,7 +135,7 @@ $(document).ready(function() {
 			}
 			else {
 				$('#results').html(output.Monster);
-				populateDataViewer($('#results > button')[0].val());
+				populateDataViewer($('#results > button')[0].value);
 			};
 
 			$('#results')[0].scrollIntoView();
