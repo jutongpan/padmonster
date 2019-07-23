@@ -66,15 +66,16 @@ $(document).ready(function() {
 
 		$.ajax({
 			data: JSON.stringify({
-				MainAtt    : $('input[name=selectMainAtt]:checked').val(),
-				SubAtt     : $('input[name=selectSubAtt]:checked').val(),
-				Type       : selectedTypes,
-				Awoken     : selectedAwokenSkillIds,
-				IncSuper   : $('#IncSuper').val(),
-				Active     : selectedActiveSkillTypes,
-				Assistable : $('#checkAssistable').prop("checked"),
-				SortBy     : $('select#SortBy').val(),
-				TopN       : $('select#TopN').val()
+				MainAtt     : $('input[name=selectMainAtt]:checked').val(),
+				SubAtt      : $('input[name=selectSubAtt]:checked').val(),
+				Type        : selectedTypes,
+				TypeBoolean : $('#TypeBoolean').prop("checked"),
+				Awoken      : selectedAwokenSkillIds,
+				IncSuper    : $('#IncSuper').val(),
+				Active      : selectedActiveSkillTypes,
+				Assistable  : $('#checkAssistable').prop("checked"),
+				SortBy      : $('select#SortBy').val(),
+				TopN        : $('select#TopN').val()
 			}),
 			contentType: 'application/json;charset=UTF-8',
 			type: 'POST',

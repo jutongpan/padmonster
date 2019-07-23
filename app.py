@@ -105,6 +105,7 @@ def monSearch1():
     MainAtt      = request.json['MainAtt']
     SubAtt       = request.json['SubAtt']
     Type         = request.json['Type']
+    TypeBoolean  = request.json['TypeBoolean']
     Awoken       = request.json['Awoken']
     IncSuper     = request.json['IncSuper']
     Active       = request.json['Active']
@@ -124,8 +125,13 @@ def monSearch1():
 
     if Type:
         Type = [int(i) for i in Type]
-        MonsterIdByType = df_type[df_type.TypeId.isin(Type)].MonsterId.tolist()
-        dff = dff[dff.MonsterId.isin(MonsterIdByType)]
+        if TypeBoolean: # has Type1 OR Type2
+            MonsterIdByType = df_type[df_type.TypeId.isin(Type)].MonsterId.tolist()
+            dff = dff[dff.MonsterId.isin(MonsterIdByType)]
+        else: # has Type1 AND Type2
+            MonsterIdByTypes_listoflists = [df_type[df_type.TypeId == i].MonsterId.tolist() for i in Type]
+            MonsterIdByTypes = list(set.intersection(*map(set, MonsterIdByTypes_listoflists)))
+            dff = dff[dff.MonsterId.isin(MonsterIdByTypes)]
 
     if Awoken:
         Awoken = [int(i) for i in Awoken]

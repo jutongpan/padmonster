@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-select.min.css') }}">
   <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css"> -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/pretty-checkbox.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-switch.min.css') }}">
   <style type="text/css">
     .btn-monster.btn {
       padding: 0px;
@@ -102,7 +103,9 @@
             </div>
 
             <div class="form-group">
-              <label>Type</label>
+
+              <label style="padding-right: 20px">Types</label>
+              <input id="TypeBoolean" type="checkbox" data-toggle="switch" data-size="mini" data-on-color="secondary" data-on-text="OR" data-off-color="secondary" data-off-text="AND" checked style="background-color: red">
               <div class="btn-group" id="Type">
                 {% for TypeId in TypeIds %}
                   <label class="btn btn-default checkbtn">
@@ -111,6 +114,7 @@
                   </label>
                 {% endfor %}
               </div>
+
             </div>
 
             
@@ -268,8 +272,11 @@
   <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/bootstrap-select.min.js"></script> -->
   <script src="{{ url_for('static', filename='js/bootstrap-select.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap-switch.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js/form.js') }}"></script>
   <script type="text/javascript">
+    $('[data-toggle="switch"]').bootstrapSwitch();
+
     $('button[name=AwokenSkillSelector]').click(function() {
       var ASID = $(this).val();
       $('div#selected_awokenskills').append(
