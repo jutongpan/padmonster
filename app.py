@@ -106,6 +106,8 @@ def monSearch1():
     SubAtt       = request.json['SubAtt']
     Type         = request.json['Type']
     TypeBoolean  = request.json['TypeBoolean']
+    FromRarity   = request.json['FromRarity']
+    ToRarity     = request.json['ToRarity']
     Awoken       = request.json['Awoken']
     IncSuper     = request.json['IncSuper']
     Active       = request.json['Active']
@@ -132,6 +134,17 @@ def monSearch1():
             MonsterIdByTypes_listoflists = [df_type[df_type.TypeId == i].MonsterId.tolist() for i in Type]
             MonsterIdByTypes = list(set.intersection(*map(set, MonsterIdByTypes_listoflists)))
             dff = dff[dff.MonsterId.isin(MonsterIdByTypes)]
+
+    if FromRarity:
+        if ToRarity:
+            MonsterRarity = list(range(int(FromRarity), int(ToRarity)+1))
+        else:
+            MonsterRarity = [int(FromRarity)]
+    elif ToRarity:
+        MonsterRarity = [int(ToRarity)]
+    else:
+        MonsterRarity = []
+    dff = dff[dff.Rarity.isin(MonsterRarity)]
 
     if Awoken:
         Awoken = [int(i) for i in Awoken]

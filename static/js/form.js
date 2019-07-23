@@ -70,6 +70,8 @@ $(document).ready(function() {
 				SubAtt      : $('input[name=selectSubAtt]:checked').val(),
 				Type        : selectedTypes,
 				TypeBoolean : $('#TypeBoolean').prop("checked"),
+				FromRarity  : $('#FromRarity').val(),
+				ToRarity    : $('#ToRarity').val(),
 				Awoken      : selectedAwokenSkillIds,
 				IncSuper    : $('#IncSuper').val(),
 				Active      : selectedActiveSkillTypes,
